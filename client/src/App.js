@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Home from './pages/Home.js';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Routes from './pages/Routes';
 
 class App extends Component {
   render() {
     return (
-      <Home/>
+      <Routes/>
     );
   }
 }

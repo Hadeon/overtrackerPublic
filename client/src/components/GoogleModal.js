@@ -5,19 +5,16 @@ import Router from 'next/router';
  
 const responseSuccess = (res) => {
   console.log(res);
-  Router.push('/Home');
 }
 
 const responseFailure = (res) => {
   console.log(res);
-  message = 'Failed to login';
 }
 
-const loginButton = {
-  width: '100px'
+const disabledStyle = {
+  backgroundColor: 'transparent',
+  borderStyle: 'none',
 }
-
-const message = '';
 
 export default class GoogleModal extends Component{
   render(){
@@ -25,11 +22,11 @@ export default class GoogleModal extends Component{
       <div>
         <GoogleLogin
         clientId="153938303648-aj9e61uqj4d377es792r29ks3evdin7m.apps.googleusercontent.com"
-        buttonText="Login"
         onSuccess={responseSuccess}
         onFailure={responseFailure}
-        />
-        <p>{message}</p>
+        style={disabledStyle}>
+        <Button style={{color:'white'}}>Login</Button>
+        </GoogleLogin>
       </div>
     )
   }
