@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import GoogleLogin from 'react-google-login';
-import Router from 'next/router';
+import PropTypes from 'prop-types';
+
+import { setUser } from '../_actions/userActions';
  
 const responseSuccess = (res) => {
+  setUser(res);
   console.log(res);
 }
 
@@ -30,4 +33,8 @@ export default class GoogleModal extends Component{
       </div>
     )
   }
+}
+
+GoogleModal.propTypes = {
+  setUser: PropTypes.func.isRequired
 }

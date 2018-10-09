@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 import GoogleModal from './GoogleModal';
 
-const drawerWidth = 240;
+import { setUser } from '../_actions/userActions';
 
 const styles = theme => ({
   root: {
@@ -55,7 +55,7 @@ class NavBar extends Component {
       <Menu open={this.state.open} style={{zIndex: 0}}>
         <MenuItem component={Link} to="/">Home</MenuItem>
         <MenuItem component={Link} to="/about">About</MenuItem>
-        <MenuItem>Contact</MenuItem>
+        <MenuItem onMouseUp={setUser({1:'test'})}>Contact</MenuItem>
       </Menu>
     </div>
     )
