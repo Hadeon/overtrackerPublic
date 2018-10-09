@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { getUser } from '../_actions/userActions';
 
 import NavBar from '../components/NavBar';
+import TestChart from '../components/TestChart';
 
 const paper = {
   margin: '10px',
@@ -32,6 +33,9 @@ class Home extends Component{
           </Paper>
           <Paper style={paper}>
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
+          </Paper>
+          <Paper style={paper}>
+            <TestChart/>
           </Paper>
         </Grid>
       </div>
