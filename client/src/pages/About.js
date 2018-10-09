@@ -12,11 +12,6 @@ const paper = {
   width: '80%',
   textAlign: 'center'
 }
-const header = {
-  fontSize: '20px',
-  fontFamily: 'Arial',
-  marginBottom: '25px'
-}
 
 export default class About extends Component{
   render(){

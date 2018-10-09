@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 
 import { getUser } from '../_actions/userActions';
@@ -16,20 +15,10 @@ const paper = {
   width: '80%',
   textAlign: 'center'
 }
-const header = {
-  fontSize: '20px',
-  fontFamily: 'Arial',
-  marginBottom: '25px'
-}
 
 class Home extends Component{
   componentDidMount() {
     getUser();
-    console.log(this.props)
-  }
-  checkUser() {
-    getUser();
-
   }
   
   render(){
@@ -39,11 +28,10 @@ class Home extends Component{
         <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
           <Paper style={paper}>
           <Typography variant="title" color="inherit">Overtracker</Typography>
-          <Typography variant="body" color="secondary">In order to access your data please login with Google</Typography>
+          <Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography>
           </Paper>
           <Paper style={paper}>
-            <Typography variant="body" color="primary">{this.props.user}</Typography>
-            <Button onClick={this.checkUser}>Check</Button>
+            <Typography variant="body1" color="primary">{this.props.user}</Typography>
           </Paper>
         </Grid>
       </div>
