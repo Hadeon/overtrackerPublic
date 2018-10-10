@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 class TestChart extends Component {
   constructor(props){
     super(props);
     this.state = {
       chartData : {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Horizon", "Anubis", "Volskaya", "Nepal", "Oasis", "Eichenwald", "King's Row"],
         datasets: [{
-        label: "My First dataset",
+        label: "Map Wins",
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
         data: [0, 10, 5, 2, 20, 30, 45],
@@ -21,14 +21,14 @@ class TestChart extends Component {
     const chartOptions = {
       maintainAspectRatio: false,
       xAxes: [
-        {
-            ticks: {
-               callback: function(label, index, labels) {
-                 return label.toFixed(2) + "%";
-               }
-            }
-        }
-      ],
+                {
+                    ticks: {
+                      callback: function(label, index, labels) {
+                        return label.toFixed(2) + "%";
+                      }
+                    }
+                }
+            ],
       yAxes: [
                 {
                     ticks: {
@@ -44,7 +44,7 @@ class TestChart extends Component {
     }
 
     return(
-      <Line 
+      <Bar 
       data={this.state.chartData}
       options={chartOptions}
       height={500}
