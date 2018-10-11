@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
 import { getUser } from '../_actions/userActions';
+import { getItems } from '../_actions/itemActions';
 
 import NavBar from '../components/NavBar';
 import TestChart from '../components/TestChart';
@@ -19,10 +20,12 @@ const paper = {
 
 class Home extends Component{
   componentDidMount() {
-    getUser();
+    // this.props.getUser();
+    this.props.getItems();
   }
   
   render(){
+    const { items } = this.props.item;
     return(
       <div>
         <NavBar/>
@@ -44,11 +47,14 @@ class Home extends Component{
 }
 
 Home.propTypes = {
-  getUser: PropTypes.func.isRequired
+  getUser: PropTypes.func.isRequired,
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
   user: state.user.userData,
+  item: state.item
 })
 
-export default connect(mapStateToProps, { getUser })(Home)
+export default connect(mapStateToProps, { getUser, getItems })(Home)

@@ -14,6 +14,11 @@ export default function(state = initialState, action) {
         items: action.payload,
         loading: false
       }
+    case ITEMS_LOADING:
+    return {
+        ...state,
+        loading: true
+    }
     default:
       return state;
   }
