@@ -10,6 +10,7 @@ import { getItems } from '../_actions/itemActions';
 
 import NavBar from '../components/NavBar';
 import TestChart from '../components/TestChart';
+import MapStatistics from '../components/MapStatistics';
 
 const paper = {
   margin: '10px',
@@ -20,8 +21,8 @@ const paper = {
 
 class Home extends Component{
   componentDidMount() {
-    // this.props.getUser();
-    this.props.getItems();
+    this.props.getUser();
+    // this.props.getItems();
   }
   
   render(){
@@ -40,6 +41,11 @@ class Home extends Component{
           <Paper style={paper}>
             <TestChart/>
           </Paper>
+          {/* MapStatistics will be mapped from the stored data so that they dynamically render without a ton of code */}
+          <MapStatistics mapName="Horizon"/>
+          <MapStatistics mapName="Anubis"/>
+          <MapStatistics mapName="Volskaya"/>
+          <MapStatistics mapName="Nepal"/>
         </Grid>
       </div>
     )

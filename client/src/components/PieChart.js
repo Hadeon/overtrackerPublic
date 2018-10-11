@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
-class TestChart extends Component {
+class PieChart extends Component {
   constructor(props){
     super(props);
     this.state = {
       chartData : {
-        labels: ["Horizon", "Anubis", "Volskaya", "Nepal", "Oasis", "Eichenwald", "King's Row"],
+        labels: ["D.VA", "Pharah", "Moira", "Reinhardt", "Hanzo", "Ana", "Brigitte"],
         datasets: [{
-        label: "Win %",
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [10, 30, 5, 100, 20, 30, 45],
+        label: "Hero Win %",
+        backgroundColor: 'rgb(90, 90, 200)',
+        data: [56, 57, 58, 55, 58, 55, 60],
         }]
     }
     }
@@ -45,14 +44,14 @@ class TestChart extends Component {
     }
 
     return(
-      <Bar 
+      <Pie 
       data={this.state.chartData}
       options={chartOptions}
-      height={350}
-      width={700}
+      height={300}
+      width={300}
       />
     )
   }
 }
 
-export default TestChart
+export default PieChart
