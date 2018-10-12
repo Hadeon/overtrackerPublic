@@ -19,6 +19,13 @@ const paper = {
   textAlign: 'center'
 }
 
+const mapNames = [
+  'Horizon',
+  'Anubis',
+  'Volskaya',
+  'Nepal'
+]
+
 class Home extends Component{
   componentDidMount() {
     this.props.getUser();
@@ -41,11 +48,9 @@ class Home extends Component{
           <Paper style={paper}>
             <TestChart/>
           </Paper>
-          {/* MapStatistics will be mapped from the stored data so that they dynamically render without a ton of code */}
-          <MapStatistics mapName="Horizon"/>
-          <MapStatistics mapName="Anubis"/>
-          <MapStatistics mapName="Volskaya"/>
-          <MapStatistics mapName="Nepal"/>
+          {mapNames.map((name) => (
+            <MapStatistics mapName={name}/>
+          ))}
         </Grid>
       </div>
     )

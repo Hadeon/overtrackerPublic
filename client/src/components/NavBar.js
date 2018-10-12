@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 
 import GoogleModal from './GoogleModal';
@@ -52,11 +53,13 @@ class NavBar extends Component {
           <GoogleModal/>
         </Toolbar>
       </AppBar>
-      <Menu open={this.state.open} style={{zIndex: 0}}>
+      <Paper>
+      <Menu open={this.state.open} style={{zIndex: 0, position: 'absolute', top: '0px'}}>
         <MenuItem component={Link} to="/">Home</MenuItem>
         <MenuItem component={Link} to="/about">About</MenuItem>
         <MenuItem onMouseUp={setUser({1:'test'})}>Contact</MenuItem>
       </Menu>
+      </Paper>
     </div>
     )
   }
