@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 
 import GoogleModal from './GoogleModal';
@@ -29,37 +28,43 @@ const styles = theme => ({
 });
 
 class NavBar extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      open: false
-    }
-  }
+  state = {
+    anchorEl: null
+  };
 
-  handleToggle = () => { this.setState({ open: !this.state.open })}
+  handleClick = event => { this.setState({ anchorEl: event.currentTarget })}
+
+  handleClose = () => { this.setState({ anchorEl: null })}
 
   render(){
     const { classes } = this.props;
+    const { anchorEl } = this.state;
     return (
       <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon onClick={this.handleToggle}/>
+            <MenuIcon onClick={this.handleClick} aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true"/>
           </IconButton>
+          <Menu id="simple-menu" open={Boolean(anchorEl)} anchorEl={this.ancherEl} anchorReference="none" onClose={this.handleClose}           PaperProps={{
+            style: {
+              width: 100,
+              padding: 0,
+              position: 'absolute',
+              top: '60px'
+            },
+          }}>
+              <MenuItem component={Link} to="/" onClick={this.handleClose}>Home</MenuItem>
+              <MenuItem component={Link} to="/about" onClick={this.handleClose}>About</MenuItem>
+              <MenuItem onMouseUp={setUser({1:'test'})} onClick={this.handleClose}>Contact</MenuItem>
+          </Menu>
           <Typography variant="title" color="inherit" className={classes.grow}>
             Welcome
           </Typography>
           <GoogleModal/>
         </Toolbar>
       </AppBar>
-      <Paper>
-      <Menu open={this.state.open} style={{zIndex: 0, position: 'absolute', top: '0px'}}>
-        <MenuItem component={Link} to="/">Home</MenuItem>
-        <MenuItem component={Link} to="/about">About</MenuItem>
-        <MenuItem onMouseUp={setUser({1:'test'})}>Contact</MenuItem>
-      </Menu>
-      </Paper>
+
     </div>
     )
   }
