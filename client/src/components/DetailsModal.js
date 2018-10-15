@@ -5,7 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Menu from '@material-ui/core/Menu';
+import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = theme => ({
@@ -32,6 +32,14 @@ const styles = theme => ({
 });
 
 class DetailsModal extends Component {
+  state = {
+    mapName: ''
+  }
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
   render(){
     const { classes } = this.props;
     return(
@@ -43,12 +51,16 @@ class DetailsModal extends Component {
           </Typography>
           <Paper className={classes.mainContainer}>
             <Typography variant="title">Map</Typography>
-            <select>
-              <option>Anubis</option>
-              <option>Nepal</option>
-              <option>Eichenwald</option>
-              <option>King's Row</option>
-            </select>
+            <Select value={this.state.mapName} onChange={this.handleChange}
+            inputProps={{
+              name: 'mapName',
+              id: 'mapId'
+            }}>
+              <MenuItem value={'Anubis'}>Anubis</MenuItem>
+              <MenuItem value={'Route 66'}>Route 66</MenuItem>
+              <MenuItem value={'King\'s Row'}>King's Row</MenuItem>
+              <MenuItem value={'Nepal'}>Nepal</MenuItem>
+            </Select>
           </Paper>
           <Paper className={classes.mainContainer}>
             <Typography variant="title">Result</Typography>
