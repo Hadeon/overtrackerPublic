@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 
 import { getUser } from '../_actions/userActions';
@@ -11,6 +13,7 @@ import { getItems } from '../_actions/itemActions';
 import NavBar from '../components/NavBar';
 import TestChart from '../components/TestChart';
 import MapStatistics from '../components/MapStatistics';
+import DetailsModal from '../components/DetailsModal';
 
 const paper = {
   margin: '10px',
@@ -27,9 +30,22 @@ const mapNames = [
 ]
 
 class Home extends Component{
+
+  state = {
+    open: false
+  };
+
   componentDidMount() {
     this.props.getUser();
     // this.props.getItems();
+  }
+
+  openModal = () => {
+    this.setState({ open: true });
+  }
+
+  closeModal = () => {
+    this.setState({ open: false });
   }
   
   render(){
@@ -44,6 +60,12 @@ class Home extends Component{
           </Paper>
           <Paper style={paper}>
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
+          </Paper>
+          <Paper style={paper}>
+            <Button onClick={this.openModal} variant="fab" color="primary">
+              <AddIcon/>
+            </Button>
+            <DetailsModal isOpen={this.state.open} closeModal={this.closeModal}/>
           </Paper>
           <Paper style={paper}>
             <TestChart/>
