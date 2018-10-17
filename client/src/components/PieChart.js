@@ -9,7 +9,7 @@ class PieChart extends Component {
         labels: ["D.VA", "Pharah", "Moira", "Reinhardt", "Hanzo", "Ana", "Brigitte"],
         datasets: [{
         label: "Hero Win %",
-        backgroundColor: 'rgb(90, 90, 200)',
+        backgroundColor: 'rgb(255, 128, 51)',
         data: [56, 57, 58, 55, 58, 55, 60],
         }]
     }

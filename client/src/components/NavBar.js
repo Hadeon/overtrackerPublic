@@ -24,6 +24,10 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+  },
+  appBar: {
+    backgroundColor: '#222',
+    color: 'white'
   }
 });
 

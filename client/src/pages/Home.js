@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 
+import { mapList } from '../constants';
+
 import { getUser } from '../_actions/userActions';
 import { getItems } from '../_actions/itemActions';
 
@@ -21,13 +23,6 @@ const paper = {
   width: '80%',
   textAlign: 'center'
 }
-
-const mapNames = [
-  'Horizon',
-  'Anubis',
-  'Volskaya',
-  'Nepal'
-]
 
 class Home extends Component{
 
@@ -70,7 +65,7 @@ class Home extends Component{
           <Paper style={paper}>
             <TestChart/>
           </Paper>
-          {mapNames.map((name) => (
+          {mapList.map((name) => (
             <MapStatistics mapName={name}/>
           ))}
         </Grid>

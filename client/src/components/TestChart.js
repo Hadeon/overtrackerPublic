@@ -9,8 +9,8 @@ class TestChart extends Component {
         labels: ["Horizon", "Anubis", "Volskaya", "Nepal", "Oasis", "Eichenwald", "King's Row"],
         datasets: [{
         label: "Win %",
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(51, 153, 255)',
+        borderColor: 'rgb(51, 153, 255)',
         data: [10, 30, 5, 100, 20, 30, 45],
         }]
     }
