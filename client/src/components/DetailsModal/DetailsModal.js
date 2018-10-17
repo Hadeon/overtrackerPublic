@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import HeroSelect from './HeroSelect';
+import MapResult from './MapResult';
 
 import * as constants from '../../constants/index';
 
@@ -40,32 +41,10 @@ class DetailsModal extends Component {
             Post Game Data
           </Typography>
           <Paper className={classes.mainContainer}>
-            <div className={classes.fieldContainer}>
-              <Typography variant="h1" className={classes.fieldTitle}>Map</Typography>
-              <Select value={this.state.mapName}
-              className={classes.fieldInput} onChange={this.handleChange} outlined
-              inputProps={{
-                name: 'mapName',
-                id: 'mapId'
-              }}>
-                {constants.mapList.map((name) => (
-                  <MenuItem value={name}>{name}</MenuItem>
-                ))}
-              </Select>
-            </div>
-            <div className={classes.fieldContainer}>
-              <Typography variant="h1" className={classes.fieldTitle}>Result</Typography>
-              <Select value={this.state.result}
-              className={classes.fieldInput} onChange={this.handleChange} outlined
-              inputProps={{
-                name: 'result',
-                id: 'resultId'
-              }}>
-                {constants.result.map((name) => (
-                  <MenuItem value={name}>{name}</MenuItem>
-                ))}
-              </Select>
-            </div>
+            <MapResult 
+              mapName={this.state.mapName} 
+              result={this.state.result}
+              handleChange={this.handleChange}/>
           </Paper>
           <Paper className={classes.mainContainer}>
             <Typography variant="title">Team Composition</Typography>
@@ -105,13 +84,6 @@ const styles = theme => ({
   fieldContainer: {
     display: 'inline-flex',
     width: '33%'
-  },
-  fieldTitle:{
-    marginTop: '5px'
-  },
-  fieldInput: {
-    marginLeft: '10px',
-    width: '125px'
   }
 });
 
