@@ -5,8 +5,6 @@ import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
 import HeroSelect from './HeroSelect';
 import MapResult from './MapResult';
@@ -49,7 +47,7 @@ class DetailsModal extends Component {
           <Paper className={classes.mainContainer}>
             <Typography variant="title">Team Composition</Typography>
             {constants.composition.map((hero) => (
-              <div className={classes.fieldContainer}>
+              <div className={classes.fieldContainer} key={hero}>
               <HeroSelect parentValue={this.state[hero]} parentClass={classes.fieldInput} handleChange={this.handleChange} inputPropsName={`${hero}`}inputPropsId={`${hero}id`}/>
             </div>
             ))}

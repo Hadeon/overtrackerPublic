@@ -44,7 +44,7 @@ class Home extends Component{
   }
   
   render(){
-    const { items } = this.props.item;
+    // const { items } = this.props.item;
     return(
       <div>
         <NavBar/>
@@ -66,7 +66,7 @@ class Home extends Component{
             <TestChart/>
           </Paper>
           {mapList.map((name) => (
-            <MapStatistics mapName={name}/>
+            <MapStatistics mapName={name} key={name}/>
           ))}
         </Grid>
       </div>
