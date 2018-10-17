@@ -10,40 +10,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import * as constants from '../constants/index';
 
-const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4
-  },
-  closeButton: {
-    position: 'absolute',
-    right: 100,
-    top: 20
-  },
-  mainContainer: {
-    marginTop: '10px',
-    position: 'relative',
-    right: '75px',
-    marginLeft: '75px',
-    padding: '25px'
-  },
-  fieldContainer: {
-    display: 'inline-flex',
-    width: '33%'
-  },
-  fieldTitle:{
-    marginTop: '5px'
-  },
-  fieldInput: {
-    marginLeft: '10px',
-    width: '125px'
-  }
-});
-
 class DetailsModal extends Component {
   state = {
     mapName: '',
@@ -112,6 +78,40 @@ class DetailsModal extends Component {
     )
   }
 }
+
+const styles = theme => ({
+  paper: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4
+  },
+  closeButton: {
+    position: 'absolute',
+    right: 100,
+    top: 20
+  },
+  mainContainer: {
+    marginTop: '10px',
+    position: 'relative',
+    right: '75px',
+    marginLeft: '75px',
+    padding: '25px'
+  },
+  fieldContainer: {
+    display: 'inline-flex',
+    width: '33%'
+  },
+  fieldTitle:{
+    marginTop: '5px'
+  },
+  fieldInput: {
+    marginLeft: '10px',
+    width: '125px'
+  }
+});
 
 DetailsModal.propTypes = {
   classes: PropTypes.object.isRequired
