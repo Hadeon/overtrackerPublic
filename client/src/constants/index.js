@@ -47,6 +47,15 @@ export const heroList = [
   'Zenyatta'
 ]
 
+export const composition = [
+  'heroOne',
+  'heroTwo',
+  'heroThree',
+  'heroFour',
+  'heroFive',
+  'heroSix'
+]
+
 export const result = [
   'Win',
   'Loss',

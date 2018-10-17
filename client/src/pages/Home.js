@@ -15,7 +15,7 @@ import { getItems } from '../_actions/itemActions';
 import NavBar from '../components/NavBar';
 import TestChart from '../components/TestChart';
 import MapStatistics from '../components/MapStatistics';
-import DetailsModal from '../components/DetailsModal';
+import DetailsModal from '../components/DetailsModal/DetailsModal';
 
 const paper = {
   margin: '10px',

@@ -8,16 +8,26 @@ import Paper from '@material-ui/core/Paper';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import * as constants from '../constants/index';
+import HeroSelect from './HeroSelect';
+
+import * as constants from '../../constants/index';
 
 class DetailsModal extends Component {
   state = {
     mapName: '',
-    result: ''
+    result: '',
+    heroOne: '',
+    heroTwo: '',
+    heroThree: '',
+    heroFour: '',
+    heroFive: '',
+    heroSix: ''
   }
 
   handleChange = e => {
+    console.log(e.target.name, e.target.value)
     this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state.teamComposition)
   }
 
   render(){
@@ -31,7 +41,7 @@ class DetailsModal extends Component {
           </Typography>
           <Paper className={classes.mainContainer}>
             <div className={classes.fieldContainer}>
-              <Typography variant="title" className={classes.fieldTitle}>Map</Typography>
+              <Typography variant="h1" className={classes.fieldTitle}>Map</Typography>
               <Select value={this.state.mapName}
               className={classes.fieldInput} onChange={this.handleChange} outlined
               inputProps={{
@@ -44,7 +54,7 @@ class DetailsModal extends Component {
               </Select>
             </div>
             <div className={classes.fieldContainer}>
-              <Typography variant="title" className={classes.fieldTitle}>Result</Typography>
+              <Typography variant="h1" className={classes.fieldTitle}>Result</Typography>
               <Select value={this.state.result}
               className={classes.fieldInput} onChange={this.handleChange} outlined
               inputProps={{
@@ -58,20 +68,12 @@ class DetailsModal extends Component {
             </div>
           </Paper>
           <Paper className={classes.mainContainer}>
-            <div className={classes.fieldContainer}>
-                <Typography variant="title" className={classes.fieldTitle}>Map</Typography>
-                <Select value={this.state.mapName}
-                className={classes.fieldInput} onChange={this.handleChange} outlined
-                inputProps={{
-                  name: 'mapName',
-                  id: 'mapId'
-                }}>
-                  <MenuItem value={'Anubis'}>Anubis</MenuItem>
-                  <MenuItem value={'Route 66'}>Route 66</MenuItem>
-                  <MenuItem value={'King\'s Row'}>King's Row</MenuItem>
-                  <MenuItem value={'Nepal'}>Nepal</MenuItem>
-                </Select>
-              </div>
+            <Typography variant="title">Team Composition</Typography>
+            {constants.composition.map((hero) => (
+              <div className={classes.fieldContainer}>
+              <HeroSelect parentValue={this.state[hero]} parentClass={classes.fieldInput} handleChange={this.handleChange} inputPropsName={`${hero}`}inputPropsId={`${hero}id`}/>
+            </div>
+            ))}
           </Paper>
         </div>
       </Modal>
