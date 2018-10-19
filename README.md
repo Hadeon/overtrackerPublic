@@ -2,11 +2,10 @@ Server endpoints are not set up so at the moment the client is the only thing th
 
 FUTURE UPDATES:
 
-  -- Once GoogleId is placed in the store, query the DB for data with that ID
-  -- Create modal Data Sheet for entering and saving data
+  -- Once UserID is placed in the store, query the DB for data with that ID
+  -- Determine how much data we are currently entering into the DetailsModal before creating the DB model
   -- Update charts upon saving
   -- Percentage algorithm for W/L for Bar graph
-  -- Create map accordions
   -- Upon clicking a map on the Bar graph, expand that associated accordion and scroll to it
 
 APP FUNCTIONALITY:
