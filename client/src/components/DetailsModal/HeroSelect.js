@@ -17,7 +17,7 @@ class HeroSelect extends Component {
           id: this.props.inputPropsId
         }}>
           {heroList.map((name) => (
-            <MenuItem value={name}>{name}</MenuItem>
+            <MenuItem value={name} key={name}>{name}</MenuItem>
           ))}
       </Select>
     )

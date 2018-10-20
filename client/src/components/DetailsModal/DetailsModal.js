@@ -9,11 +9,14 @@ import Paper from '@material-ui/core/Paper';
 import HeroSelect from './HeroSelect';
 import MapResult from './MapResult';
 
+import Anubis from '../../assets/Anubis.png';
+
 import * as constants from '../../constants/index';
 
 class DetailsModal extends Component {
   state = {
     mapName: '',
+    backgroundImage: '',
     result: '',
     heroOne: '',
     heroTwo: '',
@@ -24,16 +27,25 @@ class DetailsModal extends Component {
   }
 
   handleChange = e => {
-    console.log(e.target.name, e.target.value)
-    this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.teamComposition)
+    [e.target.name] == 'mapName' ? (
+      this.setState({ mapName: e.target.value }),
+      this.setBackground(e.target.value)
+    ) : (
+      this.setState({ [e.target.name]: e.target.value })
+    )
   }
+  
+  setBackground = name => {
+    name === 'Anubis' ? this.setState({ backgroundImage: `url(${Anubis})`}) : this.setState({ backgroundImage: '' })
+  }
+
+  // Trying to get backgroundImage: `url(${Anubis})` to dynamically change on selection of the map
 
   render(){
     const { classes } = this.props;
     return(
       <Modal open={this.props.isOpen} aria-labelledby="simple-modal-title">
-        <div className={classes.paper}>
+        <div className={classes.backgroundImage} style={{backgroundImage: this.state.backgroundImage}}>
           <Button onClick={this.props.closeModal} variant="fab" mini color="secondary" className={classes.closeButton}>X</Button>
           <Typography variant="title" id="modal-title" style={{ marginBottom: '50px' }}>
             Post Game Data
@@ -82,6 +94,17 @@ const styles = theme => ({
   fieldContainer: {
     display: 'inline-flex',
     width: '33%'
+  },
+  backgroundImage: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed'
   }
 });
 

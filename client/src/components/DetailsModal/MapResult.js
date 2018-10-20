@@ -8,33 +8,35 @@ import { withStyles } from '@material-ui/core/styles';
 import * as constants from '../../constants';
 
 class MapResult extends Component { 
+
   render() {
     const { classes } = this.props;
     return(
       <div>
         <div className={classes.fieldContainer}>
-          <Typography variant="h1" className={classes.fieldTitle}>Map</Typography>
+          <Typography variant="title" className={classes.fieldTitle}>Map</Typography>
           <Select value={this.props.mapName}
-          className={classes.fieldInput} onChange={this.props.handleChange} outlined
+          className={classes.fieldInput} onChange={this.props.handleChange} 
+          
           inputProps={{
             name: 'mapName',
             id: 'mapId'
           }}>
             {constants.mapList.map((name) => (
-              <MenuItem value={name}>{name}</MenuItem>
+              <MenuItem value={name} key={name}>{name}</MenuItem>
             ))}
           </Select>
         </div>
         <div className={classes.fieldContainer}>
-          <Typography variant="h1" className={classes.fieldTitle}>Result</Typography>
+          <Typography variant="title" className={classes.fieldTitle}>Result</Typography>
           <Select value={this.props.result}
-          className={classes.fieldInput} onChange={this.props.handleChange} outlined
+          className={classes.fieldInput} onChange={this.props.handleChange}
           inputProps={{
             name: 'result',
             id: 'resultId'
           }}>
             {constants.result.map((name) => (
-              <MenuItem value={name}>{name}</MenuItem>
+              <MenuItem value={name} key={name}>{name}</MenuItem>
             ))}
           </Select>
         </div>
