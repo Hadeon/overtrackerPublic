@@ -25,7 +25,7 @@
   "scripts": {
     "start": "next",
     "client": "npm start --prefix client",
-    "client-install" : "npm install --prefix client",
+    "client-install": "npm install --prefix client",
     "server": "nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   }

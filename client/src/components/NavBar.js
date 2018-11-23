@@ -12,8 +12,6 @@ import { Link } from 'react-router-dom';
 
 import GoogleModal from './GoogleModal';
 
-import { setUser } from '../_actions/userActions';
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -60,7 +58,7 @@ class NavBar extends Component {
           }}>
               <MenuItem component={Link} to="/" onClick={this.handleClose}>Home</MenuItem>
               <MenuItem component={Link} to="/about" onClick={this.handleClose}>About</MenuItem>
-              <MenuItem onMouseUp={setUser({1:'test'})} onClick={this.handleClose}>Contact</MenuItem>
+              <MenuItem component={Link} to="/contact" onClick={this.handleClose}>Contact</MenuItem>
           </Menu>
           <Typography variant="title" color="inherit" className={classes.grow}>
             Welcome
