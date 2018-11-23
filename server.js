@@ -16,7 +16,7 @@ const items = require('./routes/api/items');
 // Use Routes
 // app.use('/profile', profileRoutes)
 // app.use('/auth', authRoutes)
-// app.use('/api/items', items)
+app.use('/api/items', items)
 
 // Connection to DB
 mongoose
@@ -24,3 +24,17 @@ mongoose
     { useNewUrlParser: true })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err))
+
+  // Serve static assets in Prod
+
+  if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+    
+    app.get('*', () => (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client/build/index.html'));
+    });
+  }
+
+  const port = process.env.PORT || 5000;
+
+  app.listen(port, () => console.log(`Server started on port ${port}`));
