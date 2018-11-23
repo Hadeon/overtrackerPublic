@@ -1,4 +1,13 @@
-Server endpoints are not set up so at the moment the client is the only thing that needs to be run.
+In order to run the npm run dev command you need to create a /config/keys.js containing 
+
+  mongoURI,
+  google: {
+     clientID,
+     clientSecret
+  },
+  session: {
+     cookieKey
+  }
 
 FUTURE UPDATES:
 

@@ -10,6 +10,7 @@ import HeroSelect from './HeroSelect';
 import MapResult from './MapResult';
 
 import Anubis from '../../assets/Anubis.png';
+import Volskaya from '../../assets/Volskaya.jpg';
 
 import * as constants from '../../constants/index';
 
@@ -27,7 +28,7 @@ class DetailsModal extends Component {
   }
 
   handleChange = e => {
-    [e.target.name] == 'mapName' ? (
+    [e.target.name] === 'mapName' ? (
       this.setState({ mapName: e.target.value }),
       this.setBackground(e.target.value)
     ) : (
@@ -36,10 +37,10 @@ class DetailsModal extends Component {
   }
   
   setBackground = name => {
-    name === 'Anubis' ? this.setState({ backgroundImage: `url(${Anubis})`}) : this.setState({ backgroundImage: '' })
+    name === 'Anubis' ? this.setState({ backgroundImage: `url(${Anubis})`}) : 
+    name === 'Volskaya' ? this.setState({ backgroundImage: `url(${Volskaya})`}) : 
+    this.setState({ backgroundImage: '' })
   }
-
-  // Trying to get backgroundImage: `url(${Anubis})` to dynamically change on selection of the map
 
   render(){
     const { classes } = this.props;

@@ -25,7 +25,7 @@ class GoogleModal extends Component{
   }
 
   responseSuccess = (res) => {
-    this.props.setUser(res.Zi.id_token);
+    this.props.setUser(res.googleId);
     this.setState({ isSignedIn: true });
     console.log(res);
   }
