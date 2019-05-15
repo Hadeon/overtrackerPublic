@@ -10,7 +10,7 @@ router.get('/:userId', (req, res) => {
   console.log('API hit');
   Match.find({ creatorId : req.params.userId })
   .sort({ date: -1 })
-  .then(items => res.json(items))
+  .then(matches => res.json(matches))
   .catch((err) => {
     res.redirect('/')
   })

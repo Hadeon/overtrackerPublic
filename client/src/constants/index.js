@@ -13,12 +13,15 @@ export const mapList = [
   'Nepal',
   'Oasis',
   'Busan',
-  'Lijiang'
+  'Lijiang',
+  'Rialto',
+  'Havana'
 ]
 
 export const heroList = [
   'Ana',
   'Bastion',
+  'Baptiste',
   'Brigitte',
   'Doomfist',
   'DVA',

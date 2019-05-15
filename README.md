@@ -11,7 +11,6 @@ In order to run the npm run dev command you need to create a /config/keys.js con
 
 FUTURE UPDATES:
 
-  -- Once UserID is placed in the store, query the DB for data with that ID
   -- Determine how much data we are currently entering into the DetailsModal before creating the DB model
   -- Update charts upon saving
   -- Percentage algorithm for W/L for Bar graph

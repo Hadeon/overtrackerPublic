@@ -13,9 +13,10 @@ import { getUser } from '../_actions/userActions';
 import { getItems } from '../_actions/itemActions';
 
 import NavBar from '../components/NavBar';
-import TestChart from '../components/TestChart';
 import MapStatistics from '../components/MapStatistics';
 import DetailsModal from '../components/DetailsModal/DetailsModal';
+
+import MapPercentageChart from '../components/MapPercentageChart';
 
 const paper = {
   margin: '10px',
@@ -44,14 +45,13 @@ class Home extends Component{
   }
   
   render(){
-    // const { items } = this.props.item;
+    // const { user } = this.props.user;
     return(
       <div>
         <NavBar/>
         <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
           <Paper style={paper}>
           <Typography variant="title" color="inherit">Overtracker</Typography>
-          <Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography>
           </Paper>
           <Paper style={paper}>
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
@@ -64,7 +64,11 @@ class Home extends Component{
             <DetailsModal isOpen={this.state.open} closeModal={this.closeModal}/>
           </Paper>
           <Paper style={paper}>
-            <TestChart/>
+            {(this.props.user == '') ?
+            <Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography> :
+            <MapPercentageChart userId={this.props.user}/>
+          }
+
           </Paper>
           {mapList.map((name) => (
             <MapStatistics mapName={name} key={name}/>

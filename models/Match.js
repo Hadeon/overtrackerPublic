@@ -9,12 +9,28 @@ const MatchSchema = new Schema({
       required: true
    },
    matchDetails: {
+      teamName: {
+         type: String,
+         required: false
+      },
+      teamId: {
+         type: String,
+         required: false
+      },
       result: {
          type: String,
          required: false
       },
       map: {
          type: String,
+         required: false
+      },
+      enemyTeam: {
+         type: String,
+         required: false
+      },
+      allyHeroes: {
+         type: Array,
          required: false
       }
    },
