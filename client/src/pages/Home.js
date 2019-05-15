@@ -57,6 +57,7 @@ class Home extends Component{
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
           </Paper>
           <Paper style={paper}>
+             <Typography variant="title" style={{marginBottom: '10px'}}>Add Match Record</Typography>
             <Button onClick={this.openModal} variant="fab" color="primary">
               <AddIcon/>
             </Button>

@@ -5,9 +5,7 @@ import { GoogleLogout } from 'react-google-login';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setUser } from '../_actions/userActions';
- 
-
+import { setUser, getUser } from '../_actions/userActions';
 
 const responseFailure = (res) => {
   console.log(res);
@@ -20,26 +18,20 @@ const disabledStyle = {
 
 class GoogleModal extends Component{
 
-  state = {
-    isSignedIn: false
-  }
-
   responseSuccess = (res) => {
     this.props.setUser(res.googleId);
-    this.setState({ isSignedIn: true });
-    console.log(res);
+    console.log('Login triggered');
   }
 
   logout = (res) => {
     this.props.setUser('test');
-    this.setState({ isSignedIn: false });
-    console.log(this.state.isSignedIn, res)
+    console.log('Logout triggered')
   }
 
   render(){
     return(
       <div>
-        {this.state.isSignedIn ? 
+        {(this.props.user !== '') ? 
         <GoogleLogout
           buttonText="Logout"
           onLogoutSuccess={this.logout}
@@ -60,11 +52,12 @@ class GoogleModal extends Component{
 }
 
 GoogleModal.propTypes = {
-  setUser: PropTypes.func.isRequired
+  setUser: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
   user: state.user.userData,
 })
 
-export default connect(mapStateToProps, { setUser })(GoogleModal)
+export default connect(mapStateToProps, { setUser, getUser })(GoogleModal)

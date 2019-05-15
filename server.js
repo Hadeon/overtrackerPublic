@@ -9,14 +9,14 @@ const keys = require('./config/keys')
 // const googleSetup = require('./config/google-setup');
 const authRoutes = require('./routes/auth-routes');
 const profileRoutes = require('./routes/profile-routes');
-const items = require('./routes/api/items');
+const matches = require('./routes/api/matches');
 
 // Auth routes
 
 // Use Routes
 // app.use('/profile', profileRoutes)
 // app.use('/auth', authRoutes)
-app.use('/api/items', items)
+app.use('/api/matches', matches)
 
 // Connection to DB
 mongoose

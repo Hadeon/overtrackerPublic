@@ -1,7 +1,7 @@
 import { SET_USER, GET_USER } from '../_actions/types.js';
 
 const initialState = {
-  userData: 'test'
+  userData: ''
 }
 
 export default function(state = initialState, action) {

@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const Item = require('../../models/Item.js');
+const Match = require('../../models/Match.js');
 
 // @route GET api/items
 // Get All Items
 
-router.get('/', (req, res) => {
+router.get('/:userId', (req, res) => {
   console.log('API hit');
-  Item.find({ })
+  Match.find({ creatorId : req.params.userId })
   .sort({ date: -1 })
   .then(items => res.json(items))
   .catch((err) => {
