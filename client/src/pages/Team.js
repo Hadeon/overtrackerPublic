@@ -25,7 +25,7 @@ const paper = {
   textAlign: 'center'
 }
 
-class Home extends Component{
+class Team extends Component{
 
   state = {
     open: false
@@ -51,7 +51,8 @@ class Home extends Component{
         <NavBar/>
         <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
           <Paper style={paper}>
-          <Typography variant="title" color="inherit">Overtracker</Typography>
+          {/* Use the teamId prop to load in the team data and render the team name at the top of the page */}
+          <Typography variant="title" color="inherit">Garbage</Typography>
           </Paper>
           <Paper style={paper}>
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
@@ -79,7 +80,7 @@ class Home extends Component{
   }
 }
 
-Home.propTypes = {
+Team.propTypes = {
   getUser: PropTypes.func.isRequired,
   getItems: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired
@@ -90,4 +91,4 @@ const mapStateToProps = (state) => ({
   item: state.item
 })
 
-export default connect(mapStateToProps, { getUser, getItems })(Home)
+export default connect(mapStateToProps, { getUser, getItems })(Team)
