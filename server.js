@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 
 const app = express()
-const keys = require('./config/keys')
+// const keys = require('./config/keys')
 const dotenv = require('dotenv');
 dotenv.config();
 
