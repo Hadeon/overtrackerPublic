@@ -15,13 +15,13 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div>
-            <Route path="/" component={Dashboard} />
+            <Route exact path="/" component={Dashboard} />
             <Route exact path="/team" component={Team} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
           </div>
         </Router>
-      </Provider>
+      </Provider> 
     );
   }
 }
