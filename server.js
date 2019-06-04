@@ -5,6 +5,8 @@ const passport = require('passport')
 
 const app = express()
 const keys = require('./config/keys')
+const dotenv = require('dotenv');
+dotenv.config();
 
 // const googleSetup = require('./config/google-setup');
 const authRoutes = require('./routes/auth-routes');
@@ -20,7 +22,7 @@ app.use('/api/matches', matches)
 
 // Connection to DB
 mongoose
-  .connect(keys.mongoURI,
+  .connect(process.env.MONGOURI,
     { useNewUrlParser: true })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err))

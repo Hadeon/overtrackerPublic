@@ -18,13 +18,6 @@ import DetailsModal from '../components/DetailsModal/DetailsModal';
 
 import MapPercentageChart from '../components/MapPercentageChart';
 
-const paper = {
-  margin: '10px',
-  padding: '25px',
-  width: '80%',
-  textAlign: 'center'
-}
-
 class Team extends Component{
 
   state = {
@@ -65,7 +58,7 @@ class Team extends Component{
             <DetailsModal isOpen={this.state.open} closeModal={this.closeModal}/>
           </Paper>
           <Paper style={paper}>
-            {(this.props.user == '') ?
+            {(this.props.user === '') ?
             <Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography> :
             <MapPercentageChart userId={this.props.user}/>
           }
@@ -78,6 +71,13 @@ class Team extends Component{
       </div>
     )
   }
+}
+
+const paper = {
+  margin: '10px',
+  padding: '25px',
+  width: '80%',
+  textAlign: 'center'
 }
 
 Team.propTypes = {
