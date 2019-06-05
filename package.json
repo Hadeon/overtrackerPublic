@@ -24,7 +24,7 @@
     "react-scripts": "1.1.5"
   },
   "scripts": {
-    "start": "npm start --prefix client",
+    "start": "npm install --prefix client && npm start --prefix client",
     "client": "npm start --prefix client",
     "client-install": "npm install --prefix client",
     "server": "nodemon server.js",
