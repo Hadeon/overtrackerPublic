@@ -7,7 +7,7 @@ const Match = require('../../models/Match.js');
 // Get All Matches by the userId
 
 router.get('/:userId', (req, res) => {
-  console.log('API hit');
+  console.log('User API hit');
   Match.find({ creatorId : req.params.userId })
   .sort({ date: -1 })
   .then(matches => res.json(matches))

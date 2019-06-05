@@ -8,12 +8,12 @@ const MatchSchema = new Schema({
       type: String,
       required: true
    },
+   teamId: {
+      type: String,
+      required: false
+   },
    matchDetails: {
       teamName: {
-         type: String,
-         required: false
-      },
-      teamId: {
          type: String,
          required: false
       },
