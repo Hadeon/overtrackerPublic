@@ -1,9 +1,9 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
-const passport = require('passport')
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
-const app = express()
+const app = express();
 // const keys = require('./config/keys')
 const dotenv = require('dotenv');
 dotenv.config();
@@ -12,20 +12,22 @@ dotenv.config();
 const authRoutes = require('./routes/auth-routes');
 const profileRoutes = require('./routes/profile-routes');
 const matches = require('./routes/api/matches');
+const teams = require('./routes/api/teams');
 
 // Auth routes
 
 // Use Routes
 // app.use('/profile', profileRoutes)
 // app.use('/auth', authRoutes)
-app.use('/api/matches', matches)
+app.use('/api/matches', matches);
+app.use('/api/teams', teams);
 
 // Connection to DB
 mongoose
   .connect(process.env.MONGOURI,
     { useNewUrlParser: true })
   .then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
   // Serve static assets in Prod
 
