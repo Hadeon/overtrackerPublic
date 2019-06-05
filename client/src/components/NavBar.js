@@ -59,6 +59,7 @@ class NavBar extends Component {
               <MenuItem component={Link} to="/" onClick={this.handleClose}>Home</MenuItem>
               <MenuItem component={Link} to="/about" onClick={this.handleClose}>About</MenuItem>
               <MenuItem component={Link} to="/contact" onClick={this.handleClose}>Contact</MenuItem>
+              <MenuItem component={Link} to="/team" onClick={this.handleClose}>Contact</MenuItem>
           </Menu>
           <Typography variant="title" color="inherit" className={classes.grow}>
             Welcome
