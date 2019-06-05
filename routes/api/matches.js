@@ -3,8 +3,8 @@ const router = express.Router();
 
 const Match = require('../../models/Match.js');
 
-// @route GET api/items
-// Get All Items
+// @route GET api/matches
+// Get All Matches by the userId
 
 router.get('/:userId', (req, res) => {
   console.log('API hit');

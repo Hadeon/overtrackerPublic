@@ -65,4 +65,7 @@ export const result = [
   'Tie'
 ]
 
-export const apiRoute = 'https://overtrackerapi.herokuapp.com';
+// development
+export const apiRoute = '';
+// in production 
+// export const apiRoute = 'https://overtrackerapi.herokuapp.com';

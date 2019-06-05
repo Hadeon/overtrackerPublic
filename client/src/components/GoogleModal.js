@@ -42,7 +42,8 @@ class GoogleModal extends Component{
           clientId="153938303648-aj9e61uqj4d377es792r29ks3evdin7m.apps.googleusercontent.com"
           onSuccess={this.responseSuccess}
           onFailure={responseFailure}
-          style={disabledStyle}>
+          style={disabledStyle}
+          cookiePolicy={'single_host_origin'}>
           <Button style={{color:'white'}}>Login</Button>
         </GoogleLogin>
         }
