@@ -1,13 +1,12 @@
-In order to run the npm run dev command you need to create a /config/keys.js containing 
+In order to run the npm run dev command you need to create a .env containing:
+MONGOURI='yourmongourl'
 
-  mongoURI,
-  google: {
-     clientID,
-     clientSecret
-  },
-  session: {
-     cookieKey
-  }
+Additionally, as I had to split the app in two for Heroku, there's some configuration that will need to be done in order to get it running locally vs. on Heroku
+
+-- In the root package.json the start script needs to be changed to just run the server/client scripts respectively.
+-- In the client package.json, in order for it to function locally there needs to be a proxy for localhost:5000
+  -- This needs to be removed in Heroku
+-- In the client directory, the constants contains an apiRoute which is empty when local (as it uses the localhost proxy) and needs to be replaced with the Heroku API url for the Heroku app.
 
 FUTURE UPDATES:
 
