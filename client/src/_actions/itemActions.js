@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { apiRoute } from '../constants/index';
 
 import { 
   GET_ITEMS,
@@ -8,7 +9,7 @@ import {
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
   axios
-     .get('/api/items')
+     .get(`${apiRoute}/api/items`)
      .then(res => dispatch({
         type: GET_ITEMS,
         payload: res.data

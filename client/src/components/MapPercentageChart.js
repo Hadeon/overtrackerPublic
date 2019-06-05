@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { mapList } from '../constants/index';
+import { mapList, apiRoute } from '../constants/index';
 
 class MapPercentageChart extends Component {
   constructor(props){
@@ -29,7 +29,7 @@ class MapPercentageChart extends Component {
     setMaps();
 
     // Need to setup redux state in this component in order to update the state with the returned json (so that I won't need superfluous requests later on)
-    fetch(`/api/matches/${this.props.userId}`)
+    fetch(`${apiRoute}/api/matches/${this.props.userId}`)
       .then(res => res.json())
       .then(data => data.map(match => {
         console.log(match);

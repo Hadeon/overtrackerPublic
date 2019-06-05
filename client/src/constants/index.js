@@ -64,3 +64,5 @@ export const result = [
   'Loss',
   'Tie'
 ]
+
+export const apiRoute = 'https://overtrackerapi.herokuapp.com';
