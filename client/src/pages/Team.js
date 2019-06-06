@@ -58,7 +58,7 @@ class Team extends Component{
           <Paper style={paper}>
             {(this.props.user === '') ?
             <Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography> :
-            <MapPercentageChart userId={this.props.user}/>
+            <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
           }
           </Paper>
           {mapList.map((name) => (

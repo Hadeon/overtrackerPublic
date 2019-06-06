@@ -17,18 +17,6 @@ router.get('/:userId', (req, res) => {
   })
 });
 
-// @route GET api/teams/matches
-// Get All Matches for the teamId
-
-router.get('/matches/:id', (req, res) => {
-  console.log('Team Matches API hit');
-  Matches.find({ teamId : req.params.id })
-  .sort({ date: -1 })
-  .then(match => res.json(match))
-  .catch((err) => {
-    res.redirect('/')
-  })
-})
 
 module.exports = router;
 

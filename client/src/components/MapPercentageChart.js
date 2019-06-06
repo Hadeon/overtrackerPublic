@@ -29,7 +29,7 @@ class MapPercentageChart extends Component {
     setMaps();
 
     // Need to setup redux state in this component in order to update the state with the returned json (so that I won't need superfluous requests later on)
-    fetch(`${apiRoute}/api/matches/${this.props.userId}`)
+    fetch(`${apiRoute}/api/matches/${this.props.teamId}`)
       .then(res => res.json())
       .then(data => data.map(match => {
         console.log(match);

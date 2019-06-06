@@ -19,7 +19,7 @@ export default class TeamList extends Component{
     fetch(`${apiRoute}/api/teams/${this.props.userId}`)
     .then(res => res.json())
     .then(data => data.forEach(team => {
-      teams.push([team.teamId, team.teamName]);
+      teams.push([team._id, team.teamName]);
     })).then(() => {
       this.setState({ userTeams: teams });
     })
@@ -31,11 +31,11 @@ export default class TeamList extends Component{
       {this.state.userTeams.map(team => {
         return (
           <Paper style={subSection}>
-            <Button variant="text" teamId={team[0]} style={teamButton}>
-              <Link teamId={team[0]} to={`/team/${team[0]}`} style={teamLink}>
+            <Link key={team[0]} to={`/team/${team[0]}`} style={teamLink}>
+              <Button variant="text" teamId={team[0]} style={teamButton}>
                 <Typography variant="body1" color="textPrimary">{team[1]}</Typography>
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </Paper>
         )
       })}
