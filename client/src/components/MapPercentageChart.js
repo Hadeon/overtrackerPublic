@@ -28,13 +28,13 @@ class MapPercentageChart extends Component {
     }
     setMaps();
 
-    // Need to setup redux state in this component in order to update the state with the returned json (so that I won't need superfluous requests later on)
+    // Pull W/L by maps then calculate the W/L percentage
     fetch(`${apiRoute}/api/matches/${this.props.teamId}`)
       .then(res => res.json())
       .then(data => data.map(match => {
-        console.log(match);
-        // Update match.[mapName] Array with Wins and Losses
-        // Then update chartData labels/data based off the Arrays which are not empty, and calculate the percentage from the W/L ratio respectively.
+        let matchArray = this.state.matches;
+        matchArray[`${match.matchDetails.map}`].push(match.matchDetails.result)
+        this.setState({ matches: matchArray })
       }));
   }
 
