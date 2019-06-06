@@ -21,7 +21,6 @@ export default class TeamList extends Component{
       teams.push([team.teamId, team.teamName]);
     })).then(() => {
       this.setState({ userTeams: teams });
-      console.log(this.state.userTeams[0])
     })
   }
 
@@ -38,11 +37,6 @@ export default class TeamList extends Component{
         )
       })}
     </React.Fragment>
-    // <Paper style={subSection}>
-    //     <Button variant="text" teamId='1'>
-    //       <Typography variant="body1" color="textPrimary">Garbage</Typography>
-    //     </Button>
-    // </Paper>
     )
   }
 }
