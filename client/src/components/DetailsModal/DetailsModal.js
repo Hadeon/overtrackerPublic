@@ -28,7 +28,7 @@ class DetailsModal extends Component {
   }
 
   handleChange = e => {
-    [e.target.name] === 'mapName' ? (
+    e.target.name === 'mapName' ? (
       this.setState({ mapName: e.target.value }),
       this.setBackground(e.target.value)
     ) : (
@@ -37,6 +37,7 @@ class DetailsModal extends Component {
   }
   
   setBackground = name => {
+    console.log('Background set', name);
     name === 'Anubis' ? this.setState({ backgroundImage: `url(${Anubis})`}) : 
     name === 'Volskaya' ? this.setState({ backgroundImage: `url(${Volskaya})`}) : 
     this.setState({ backgroundImage: '' })
@@ -53,6 +54,7 @@ class DetailsModal extends Component {
           </Typography>
           <Paper className={classes.mainContainer}>
             <MapResult 
+              name="mapName"
               mapName={this.state.mapName} 
               result={this.state.result}
               handleChange={this.handleChange}/>

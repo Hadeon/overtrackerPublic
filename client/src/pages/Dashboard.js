@@ -10,9 +10,9 @@ import { getUser } from '../_actions/userActions';
 import { getItems } from '../_actions/itemActions';
 
 import NavBar from '../components/NavBar';
+import TeamList from '../components/TeamList';
 
 class Dashboard extends Component{
-  
   render(){
     return(
       <div>
@@ -42,26 +42,14 @@ class Dashboard extends Component{
                 <Typography variant="body2" color="primary">Create a Team</Typography>
               </Button>
             </div>
-          </div>
+          </div> 
 
-          {/* Once logged in, pull list of teams affiliated with the userId then dynamically render the list below */}
           {/* On click reroute to the Team page (former Home page) and use the teamId prop to load in the data */}
-
-          <Paper style={subSection}>
-            <Button variant="text" teamId='1'>
-              <Typography variant="body1" color="textPrimary">Garbage</Typography>
-            </Button>
-          </Paper>
-          <Paper style={subSection}>
-          <Button variant="text">
-              <Typography variant="body1" color="textPrimary">Scuffed</Typography>
-            </Button>
-          </Paper>
-          <Paper style={subSection}>
-          <Button variant="text">
-              <Typography variant="body1" color="textPrimary">A Third Team</Typography>
-            </Button>
-          </Paper>
+          {(this.props.user === '') ?
+            <Paper style={subSection}><Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography></Paper> : (
+              <TeamList userId={this.props.user}/>
+            )
+          }
           </Paper>
         </Grid>
       </div>
