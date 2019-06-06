@@ -28,18 +28,41 @@ class MapPercentageChart extends Component {
     }
     setMaps();
 
-    // Pull W/L by maps then calculate the W/L percentage
-    fetch(`${apiRoute}/api/matches/${this.props.teamId}`)
-      .then(res => res.json())
-      .then(data => data.map(match => {
-        let matchArray = this.state.matches;
-        matchArray[`${match.matchDetails.map}`].push(match.matchDetails.result)
-        this.setState({ matches: matchArray })
-      }));
+  // Pull W/L by maps
+  fetch(`${apiRoute}/api/matches/${this.props.teamId}`)
+    .then(res => res.json())
+    .then(data => data.map(match => {
+      let matchArray = this.state.matches;
+      matchArray[`${match.matchDetails.map}`].push(match.matchDetails.result)
+      this.setState({ matches: matchArray })
+    })).then(() => {
+      let maps = this.state.matches;
+      let updatedChartData = this.state.chartData;
+      for(let map in maps) {
+        if(maps[map].length > 0) {
+          updatedChartData.labels.push(map);
+          updatedChartData.datasets[0].data.push(this.calculateWinLoss(maps[map]));
+          this.setState({ chartData: updatedChartData})
+        }
+      }
+    });
   }
 
-  componentDidMount() {
-    console.log(this.props)
+  // Calculate W/L percentage and set the state for chartData
+  // Iterate over matches, if the array is not empty then add the mapName to the labels array
+  // Iterate over each of those respective maps in the matches array then:
+  // Calculate the percent from (Losses / TotalMatches) * 100, then push into data array
+  calculateWinLoss(matchResults) {
+    let count = matchResults.length;
+    let losses = 0;
+    let percentage;
+    matchResults.forEach(result => {
+      if(result === "Loss") {
+        losses++;
+      }
+    })
+    percentage = (losses / count) * 100;
+    return percentage;
   }
 
   render() {
