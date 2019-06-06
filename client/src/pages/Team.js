@@ -26,7 +26,6 @@ class Team extends Component{
 
   componentDidMount() {
     this.props.getUser();
-    // this.props.getItems();
   }
 
   openModal = () => {
@@ -38,14 +37,13 @@ class Team extends Component{
   }
   
   render(){
-    // const { user } = this.props.user;
     return(
       <div>
         <NavBar/>
         <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
           <Paper style={paper}>
           {/* Use the teamId prop to load in the team data and render the team name at the top of the page */}
-          <Typography variant="title" color="inherit">Garbage</Typography>
+          <Typography variant="title" color="inherit">{this.props.match.params.teamId}</Typography>
           </Paper>
           <Paper style={paper}>
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
@@ -62,7 +60,6 @@ class Team extends Component{
             <Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography> :
             <MapPercentageChart userId={this.props.user}/>
           }
-
           </Paper>
           {mapList.map((name) => (
             <MapStatistics mapName={name} key={name}/>

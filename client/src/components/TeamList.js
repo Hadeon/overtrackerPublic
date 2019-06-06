@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 import { apiRoute } from '../constants/index';
 
@@ -30,8 +31,10 @@ export default class TeamList extends Component{
       {this.state.userTeams.map(team => {
         return (
           <Paper style={subSection}>
-            <Button variant="text" teamId={team[0]}>
-              <Typography variant="body1" color="textPrimary">{team[1]}</Typography>
+            <Button variant="text" teamId={team[0]} style={teamButton}>
+              <Link teamId={team[0]} to={`/team/${team[0]}`} style={teamLink}>
+                <Typography variant="body1" color="textPrimary">{team[1]}</Typography>
+              </Link>
             </Button>
           </Paper>
         )
@@ -44,4 +47,12 @@ export default class TeamList extends Component{
 const subSection = {
   margin: '5px',
   padding: '5px'
+}
+
+const teamButton = {
+  width: '100%'
+}
+
+const teamLink = {
+  textDecoration: 'none'
 }
