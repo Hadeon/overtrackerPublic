@@ -35,6 +35,7 @@ class MapPercentageChart extends Component {
       let matchArray = this.state.matches;
       matchArray[`${match.matchDetails.map}`].push(match.matchDetails.result)
       this.setState({ matches: matchArray })
+      console.log(this.state)
     })).then(() => {
       let maps = this.state.matches;
       let updatedChartData = this.state.chartData;
@@ -48,10 +49,6 @@ class MapPercentageChart extends Component {
     });
   }
 
-  // Calculate W/L percentage and set the state for chartData
-  // Iterate over matches, if the array is not empty then add the mapName to the labels array
-  // Iterate over each of those respective maps in the matches array then:
-  // Calculate the percent from (Losses / TotalMatches) * 100, then push into data array
   calculateWinLoss(matchResults) {
     let count = matchResults.length;
     let wins = 0;
@@ -62,7 +59,7 @@ class MapPercentageChart extends Component {
       }
     })
     percentage = (wins / count) * 100;
-    return percentage.toFixed(2);
+    return percentage.toFixed(0);
   }
 
   render() {

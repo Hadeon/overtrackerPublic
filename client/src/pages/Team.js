@@ -48,13 +48,15 @@ class Team extends Component{
           <Paper style={paper}>
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
           </Paper>
-          <Paper style={paper}>
-             <Typography variant="title" style={{marginBottom: '10px'}}>Add Match Record</Typography>
-            <Button onClick={this.openModal} variant="fab" color="primary">
-              <AddIcon/>
-            </Button>
-            <DetailsModal isOpen={this.state.open} closeModal={this.closeModal}/>
-          </Paper>
+          {(this.props.user === '') ? <React.Fragment/> : 
+            <Paper style={paper}>
+                  <Typography variant="title" style={{marginBottom: '10px'}}>Add Match Record</Typography>
+                  <Button onClick={this.openModal} variant="fab" color="primary">
+                    <AddIcon/>
+                  </Button>
+                  <DetailsModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
+            </Paper>
+          }
           <Paper style={paper}>
             {(this.props.user === '') ?
             <Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography> :

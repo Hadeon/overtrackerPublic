@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -24,7 +25,8 @@ class DetailsModal extends Component {
     heroThree: '',
     heroFour: '',
     heroFive: '',
-    heroSix: ''
+    heroSix: '',
+    notValidated: true
   }
 
   handleChange = e => {
@@ -34,6 +36,18 @@ class DetailsModal extends Component {
     ) : (
       this.setState({ [e.target.name]: e.target.value })
     )
+    setTimeout(() => {
+      this.validate()
+    }, 500)
+  }
+
+  validate() {
+    if(this.state.mapName != '' && this.state.result != '') {
+      this.setState({ notValidated: false });
+    } else {
+      this.setState({ notValidated: true });
+    }
+    console.log(this.props.userId);
   }
   
   setBackground = name => {
@@ -41,6 +55,24 @@ class DetailsModal extends Component {
     name === 'Anubis' ? this.setState({ backgroundImage: `url(${Anubis})`}) : 
     name === 'Volskaya' ? this.setState({ backgroundImage: `url(${Volskaya})`}) : 
     this.setState({ backgroundImage: '' })
+  }
+
+  postData(userId, teamId){
+    let matchData = {
+      creatorId: this.props.userId,
+      teamId: this.props.teamId,
+      matchDetails: {
+        map: this.state.mapName,
+        result: this.state.result,
+      }
+    }
+    axios
+      .post(`${constants.apiRoute}/api/matches/add`, matchData)
+      .then(() => console.log('Match added'))
+      .then(() => this.props.closeModal())
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   render(){
@@ -63,9 +95,14 @@ class DetailsModal extends Component {
             <Typography variant="title">Team Composition</Typography>
             {constants.composition.map((hero) => (
               <div className={classes.fieldContainer} key={hero}>
-              <HeroSelect parentValue={this.state[hero]} parentClass={classes.fieldInput} handleChange={this.handleChange} inputPropsName={`${hero}`}inputPropsId={`${hero}id`}/>
+              <HeroSelect parentValue={this.state[hero]} parentClass={classes.fieldInput} handleChange={this.handleChange} inputPropsName={`${hero}`} inputPropsId={`${hero}id`}/>
             </div>
             ))}
+          </Paper>
+          <Paper className={classes.mainContainer}>
+            <Button variant="raised" color="primary" onClick={() => {this.postData(this.props.userId, this.props.teamId)}} disabled={this.state.notValidated}>
+              Submit Match
+            </Button>
           </Paper>
         </div>
       </Modal>

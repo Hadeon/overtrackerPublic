@@ -26,6 +26,17 @@ router.get('/:teamId', (req, res) => {
   })
 });
 
+router.post('/add', (req, res) => {
+  const match = new Match(req.body);
+  match.save().then(match => {
+    res.json("Match added successfully");
+  }).catch(err => {
+    res.status(400).send("Unable to save to database");
+  })
+})
+
+router.get('')
+
 module.exports = router;
 
 

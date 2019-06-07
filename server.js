@@ -14,6 +14,8 @@ const profileRoutes = require('./routes/profile-routes');
 const matches = require('./routes/api/matches');
 const teams = require('./routes/api/teams');
 
+app.use(bodyParser.json());
+
 // Auth routes
 
 // Use Routes
