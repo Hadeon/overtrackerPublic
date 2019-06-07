@@ -26,7 +26,7 @@ class Team extends Component{
   };
   
   componentWillMount() {
-    fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}`)
+    fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}/${this.props.user}`)
     .then(res => res.json())
     .then(res => {
       this.setState({ valid: res[0].teamMembers.includes(this.props.user) });

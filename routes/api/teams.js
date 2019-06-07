@@ -17,9 +17,11 @@ router.get('/:userId', (req, res) => {
   })
 });
 
-router.get('/teamMember/:teamId', (req, res) => {
+// Need to set up multiple params teamId/userId so that someone can't just query the teamId and get userIds
+
+router.get('/teamMember/:teamId/:userId', (req, res) => {
   console.log('Checking if User is authorized for Team...')
-  Team.find({ _id: req.params.teamId })
+  Team.find({ _id: req.params.teamId, teamMembers: req.params.userId })
   .then(team => res.json(team))
   .catch((err) => {
     res.json('Error');
