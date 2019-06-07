@@ -62,7 +62,7 @@ class MapPercentageChart extends Component {
       }
     })
     percentage = (wins / count) * 100;
-    return percentage;
+    return percentage.toFixed(2);
   }
 
   render() {
