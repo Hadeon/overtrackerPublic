@@ -8,12 +8,12 @@ class MapPercentageChart extends Component {
     this.state = {
       matches: {},
       chartData : {
-        labels: ["Horizon", "Anubis", "Volskaya", "Nepal", "Oasis", "Eichenwald", "King's Row"],
+        labels: [],
         datasets: [{
         label: "Win %",
         backgroundColor: 'rgb(51, 153, 255)',
         borderColor: 'rgb(51, 153, 255)',
-        data: [10, 30, 5, 100, 20, 30, 45],
+        data: [],
         }]
       }
     }
@@ -54,14 +54,14 @@ class MapPercentageChart extends Component {
   // Calculate the percent from (Losses / TotalMatches) * 100, then push into data array
   calculateWinLoss(matchResults) {
     let count = matchResults.length;
-    let losses = 0;
+    let wins = 0;
     let percentage;
     matchResults.forEach(result => {
-      if(result === "Loss") {
-        losses++;
+      if(result === "Win") {
+        wins++;
       }
     })
-    percentage = (losses / count) * 100;
+    percentage = (wins / count) * 100;
     return percentage;
   }
 
