@@ -35,7 +35,6 @@ class MapPercentageChart extends Component {
       let matchArray = this.state.matches;
       matchArray[`${match.matchDetails.map}`].push(match.matchDetails.result)
       this.setState({ matches: matchArray })
-      console.log(this.state)
     })).then(() => {
       let maps = this.state.matches;
       let updatedChartData = this.state.chartData;

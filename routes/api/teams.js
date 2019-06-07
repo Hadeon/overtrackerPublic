@@ -17,6 +17,15 @@ router.get('/:userId', (req, res) => {
   })
 });
 
+router.get('/teamMember/:teamId', (req, res) => {
+  console.log('Checking if User is authorized for Team...')
+  Team.find({ _id: req.params.teamId })
+  .then(team => res.json(team))
+  .catch((err) => {
+    res.json('Error');
+  })
+})
+
 
 module.exports = router;
 

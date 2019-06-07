@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 
-import { mapList } from '../constants';
+import { mapList, apiRoute } from '../constants';
 
 import { getUser } from '../_actions/userActions';
 import { getItems } from '../_actions/itemActions';
@@ -21,8 +21,17 @@ import MapPercentageChart from '../components/MapPercentageChart';
 class Team extends Component{
 
   state = {
-    open: false
+    open: false,
+    valid: false
   };
+  
+  componentWillMount() {
+    fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}`)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({ valid: res[0].teamMembers.includes(this.props.user) });
+    })
+  }
 
   componentDidMount() {
     this.props.getUser();
@@ -38,9 +47,10 @@ class Team extends Component{
   
   render(){
     return(
-      <div>
+      <React.Fragment>
         <NavBar/>
-        <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
+        {( this.state.valid === true ) ? (
+          <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
           <Paper style={paper}>
           {/* Use the teamId prop to load in the team data and render the team name at the top of the page */}
           <Typography variant="title" color="inherit">{this.props.match.params.teamId}</Typography>
@@ -48,7 +58,6 @@ class Team extends Component{
           <Paper style={paper}>
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
           </Paper>
-          {(this.props.user === '') ? <React.Fragment/> : 
             <Paper style={paper}>
                   <Typography variant="title" style={{marginBottom: '10px'}}>Add Match Record</Typography>
                   <Button onClick={this.openModal} variant="fab" color="primary">
@@ -56,18 +65,23 @@ class Team extends Component{
                   </Button>
                   <DetailsModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
             </Paper>
-          }
           <Paper style={paper}>
-            {(this.props.user === '') ?
-            <Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography> :
             <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
-          }
           </Paper>
           {mapList.map((name) => (
             <MapStatistics mapName={name} key={name}/>
           ))}
-        </Grid>
-      </div>
+          </Grid>
+        ) : (
+          <React.Fragment>
+            <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
+              <Paper style={paper}>
+                <Typography variant="body1" color="secondary">Not Authorized.</Typography>
+              </Paper>
+            </Grid>
+          </React.Fragment>
+        )}
+      </React.Fragment>
     )
   }
 }
