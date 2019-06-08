@@ -16,10 +16,21 @@ class TeamModal extends Component{
         <Paper className={classes.modal}>
           <Button onClick={this.props.closeModal} variant="fab" mini color="secondary" className={classes.closeButton}>X</Button>
           <Typography variant="title" id="modal-title" style={{ marginBottom: '50px' }}>
-            Enter Team Name
+            {this.props.message}
           </Typography>
           <Paper className={classes.mainContainer}>
-            <TextField placeholder="Team Name" fullWidth></TextField>
+            <TextField placeholder={this.props.message} fullWidth></TextField>
+          </Paper>
+          <Paper className={classes.mainContainer}>
+            {this.props.modal === 'join' ? ( 
+              <React.Fragment>
+                <Typography>Join Team</Typography>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Typography>Create Team</Typography>
+              </React.Fragment>
+            )}
           </Paper>
         </Paper>
       </Modal>

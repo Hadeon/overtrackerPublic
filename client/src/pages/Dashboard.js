@@ -15,11 +15,19 @@ import TeamModal from '../components/TeamModal';
 
 class Dashboard extends Component{
   state = {
-    open: false
+    open: false,
+    modal: '',
+    message: ''
   };
 
-  openModal = () => {
-    console.log('open');
+  openModal = (modalAction) => {
+    this.setState({ modal: modalAction});
+    if(modalAction === 'join') {
+      this.setState({ message: 'Enter Invite Key'});
+    } 
+    if(modalAction === 'create' ) {
+      this.setState({ message: 'Enter Team Name'});
+    }
     this.setState({ open: true });
   }
 
@@ -44,16 +52,16 @@ class Dashboard extends Component{
           {/* As with Home page, create a check for the userId and if it's not present then render a 'please login' message instead */}
 
           <Paper style={paper}>
-          <TeamModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user}/>
+          <TeamModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} message={this.state.message} modal={this.state.modal}/>
           <div style={teamHeader}>
             <div style={{teamTitle}}>
               <p>My Teams</p>
             </div>
             <div style={teamButtons}>
-              <Button variant="text" color="primary">
+              <Button variant="text" color="primary" onClick={() => this.openModal('join')}>
                 <Typography variant="body2" color="primary">Join a Team</Typography>
               </Button>
-              <Button variant="text" color="primary" onClick={this.openModal}>
+              <Button variant="text" color="primary" onClick={() => this.openModal('create')}>
                 <Typography variant="body2" color="primary">Create a Team</Typography>
               </Button>
             </div>
