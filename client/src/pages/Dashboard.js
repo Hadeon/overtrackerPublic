@@ -11,8 +11,22 @@ import { getItems } from '../_actions/itemActions';
 
 import NavBar from '../components/NavBar';
 import TeamList from '../components/TeamList';
+import TeamModal from '../components/TeamModal';
 
 class Dashboard extends Component{
+  state = {
+    open: false
+  };
+
+  openModal = () => {
+    console.log('open');
+    this.setState({ open: true });
+  }
+
+  closeModal = () => {
+    this.setState({ open: false });
+  }
+
   render(){
     return(
       <div>
@@ -30,6 +44,7 @@ class Dashboard extends Component{
           {/* As with Home page, create a check for the userId and if it's not present then render a 'please login' message instead */}
 
           <Paper style={paper}>
+          <TeamModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user}/>
           <div style={teamHeader}>
             <div style={{teamTitle}}>
               <p>My Teams</p>
@@ -38,7 +53,7 @@ class Dashboard extends Component{
               <Button variant="text" color="primary">
                 <Typography variant="body2" color="primary">Join a Team</Typography>
               </Button>
-              <Button variant="text" color="primary">
+              <Button variant="text" color="primary" onClick={this.openModal}>
                 <Typography variant="body2" color="primary">Create a Team</Typography>
               </Button>
             </div>

@@ -22,14 +22,16 @@ class Team extends Component{
 
   state = {
     open: false,
-    valid: false
+    valid: false,
+    teamName: ''
   };
   
   componentWillMount() {
     fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}/${this.props.user}`)
     .then(res => res.json())
     .then(res => {
-      this.setState({ valid: res[0].teamMembers.includes(this.props.user) });
+      this.setState({ valid: res[0].teamMembers.includes(this.props.user), teamName: res[0].teamName });
+      console.log(res[0])
     })
   }
 
@@ -52,19 +54,18 @@ class Team extends Component{
         {( this.state.valid === true ) ? (
           <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
           <Paper style={paper}>
-          {/* Use the teamId prop to load in the team data and render the team name at the top of the page */}
-          <Typography variant="title" color="inherit">{this.props.match.params.teamId}</Typography>
+          <Typography variant="title" color="inherit">{this.state.teamName}</Typography>
           </Paper>
           <Paper style={paper}>
             <Typography variant="body1" color="primary">{this.props.user}</Typography>
           </Paper>
-            <Paper style={paper}>
-                  <Typography variant="title" style={{marginBottom: '10px'}}>Add Match Record</Typography>
-                  <Button onClick={this.openModal} variant="fab" color="primary">
-                    <AddIcon/>
-                  </Button>
-                  <DetailsModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
-            </Paper>
+          <Paper style={paper}>
+            <Typography variant="title" style={{marginBottom: '10px'}}>Add Match Record</Typography>
+            <Button onClick={this.openModal} variant="fab" color="primary">
+              <AddIcon/>
+            </Button>
+            <DetailsModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
+          </Paper>
           <Paper style={paper}>
             <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
           </Paper>

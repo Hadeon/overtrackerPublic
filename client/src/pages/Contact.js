@@ -21,7 +21,9 @@ export default class About extends Component{
         <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
           <Paper style={paper}>
           <Typography variant="title" color="inherit">Contact Page</Typography>
-          <Typography variant="body" color="secondary">Some kind of contact</Typography>
+          <Typography variant="body" color="secondary">
+            <a href="https://twitter.com/eandersen909?lang=en">Follow me on Twitter</a>
+          </Typography>
           </Paper>
         </Grid>
       </div>
