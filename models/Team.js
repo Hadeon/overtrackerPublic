@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 const TeamSchema = new Schema({
   teamId: {
     type: String,
-    required: true
+    required: false
   },
   teamName: {
     type: String,

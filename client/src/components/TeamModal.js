@@ -8,28 +8,82 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
+import * as constants from '../constants/index';
+
 class TeamModal extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      notValidated: true
+    }
+  }
+
+  handleInputChange = e => {
+    this.setState({
+        input: e.target.value
+    });
+    setTimeout(() => {
+      this.validate()
+    }, 500)
+  }
+
+  validate() {
+    if(this.state.input !== '') {
+      this.setState({ notValidated: false });
+    } else {
+      this.setState({ notValidated: true });
+    }
+  }
+
+  handleJoin() {
+    // let teamName = this.state.input;
+    // axios
+    //   .post(`${constants.apiRoute}/api/teams/add`, teamName)
+    //   .then(() => console.log('Team Created'))
+    //   .then(() => this.props.closeModal())
+    //   .catch(err => {
+    //     console.error(err);
+    //   });
+  }
+
+  handleCreate() {
+    let team = { teamName: this.state.input, teamMembers: [this.props.userId], creatorId: [this.props.userId] };
+    axios
+      .post(`${constants.apiRoute}/api/teams/add`, team)
+      .then(() => console.log('Team Created'))
+      .then(() => (this.setState({ input: ''}, this.props.closeModal())))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  close = () => {
+    this.setState({ input: '' });
+    this.props.closeModal();
+  }
+
   render(){
     const { classes } = this.props;
     return(
       <Modal open={this.props.isOpen} aria-labelledby="simple-modal-title">
         <Paper className={classes.modal}>
-          <Button onClick={this.props.closeModal} variant="fab" mini color="secondary" className={classes.closeButton}>X</Button>
+          <Button onClick={this.close} variant="fab" mini color="secondary" className={classes.closeButton}>X</Button>
           <Typography variant="title" id="modal-title" style={{ marginBottom: '50px' }}>
             {this.props.message}
           </Typography>
           <Paper className={classes.mainContainer}>
-            <TextField placeholder={this.props.message} fullWidth></TextField>
+            <TextField placeholder={this.props.message} value={this.state.input} fullWidth onChange={this.handleInputChange}></TextField>
           </Paper>
           <Paper className={classes.mainContainer}>
             {this.props.modal === 'join' ? ( 
-              <React.Fragment>
-                <Typography>Join Team</Typography>
-              </React.Fragment>
+              <Button variant="raised" color="primary" onClick={() => this.handleJoin}>
+                Join Team
+              </Button>
             ) : (
-              <React.Fragment>
-                <Typography>Create Team</Typography>
-              </React.Fragment>
+              <Button variant="raised" color="primary" onClick={() => this.handleCreate()} disabled={this.state.notValidated}>
+                Create Team
+              </Button>
             )}
           </Paper>
         </Paper>

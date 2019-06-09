@@ -58,11 +58,11 @@ class Dashboard extends Component{
                 <p>My Teams</p>
               </div>
               <div style={teamButtons}>
-                <Button variant="text" color="primary" onClick={() => this.openModal('join')}>
-                  <Typography variant="body2" color="primary">Join a Team</Typography>
-                </Button>
                 <Button variant="text" color="primary" onClick={() => this.openModal('create')}>
                   <Typography variant="body2" color="primary">Create a Team</Typography>
+                </Button>
+                <Button variant="text" color="primary" onClick={() => this.openModal('join')}>
+                  <Typography variant="body2" color="primary">Join a Team</Typography>
                 </Button>
               </div>
             </div> 
@@ -79,11 +79,6 @@ const paper = {
   margin: '10px',
   padding: '25px',
   width: '80%'
-}
-
-const subSection = {
-  margin: '5px',
-  padding: '5px'
 }
 
 const teamHeader = {

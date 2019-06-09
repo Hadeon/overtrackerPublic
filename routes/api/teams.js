@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const Team = require('../../models/Team.js');
-const Matches = require('../../models/Match.js');
 
 // @route GET api/teams
 // Get All Teams that include the userId within the teamMembers array.
@@ -17,7 +16,7 @@ router.get('/:userId', (req, res) => {
   })
 });
 
-// Need to set up multiple params teamId/userId so that someone can't just query the teamId and get userIds
+// Check if userId is present in team's userAccess array
 
 router.get('/teamMember/:teamId/:userId', (req, res) => {
   console.log('Checking if User is authorized for Team...')
@@ -27,6 +26,19 @@ router.get('/teamMember/:teamId/:userId', (req, res) => {
     res.json('Error');
   })
 })
+
+// Create team
+
+router.post('/add', (req, res) => {
+  const newTeam = new Team(req.body);
+  newTeam.save().then(team => {
+    res.json('Team added');
+  }).catch(err => {
+    res.status(400).send('Unable to save to database');
+  })
+})
+
+// Join team
 
 
 module.exports = router;
