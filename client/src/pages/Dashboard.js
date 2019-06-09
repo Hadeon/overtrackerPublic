@@ -48,32 +48,27 @@ class Dashboard extends Component{
             <br/><br/>
             Create or join a team in order to begin tracking match statistics. In order to join a team, that team's admins must send you an invitation code. Once you've joined a team the admins of that team can link your userId with the data being tracked so that you can have your own personal statistics page. This way you can see data across all your teams and track your progress over time.</Typography>
           </Paper>
-
-          {/* As with Home page, create a check for the userId and if it's not present then render a 'please login' message instead */}
-
-          <Paper style={paper}>
-          <TeamModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} message={this.state.message} modal={this.state.modal}/>
-          <div style={teamHeader}>
-            <div style={{teamTitle}}>
-              <p>My Teams</p>
-            </div>
-            <div style={teamButtons}>
-              <Button variant="text" color="primary" onClick={() => this.openModal('join')}>
-                <Typography variant="body2" color="primary">Join a Team</Typography>
-              </Button>
-              <Button variant="text" color="primary" onClick={() => this.openModal('create')}>
-                <Typography variant="body2" color="primary">Create a Team</Typography>
-              </Button>
-            </div>
-          </div> 
-
-          {/* On click reroute to the Team page (former Home page) and use the teamId prop to load in the data */}
-          {(this.props.user === '') ?
-            <Paper style={subSection}><Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography></Paper> : (
-              <TeamList userId={this.props.user}/>
-            )
-          }
-          </Paper>
+          {(this.props.user === '') ? (
+            <Paper style={paper}><Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography></Paper>
+          ) : ( 
+            <Paper style={paper}>
+            <TeamModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} message={this.state.message} modal={this.state.modal}/>
+            <div style={teamHeader}>
+              <div style={{teamTitle}}>
+                <p>My Teams</p>
+              </div>
+              <div style={teamButtons}>
+                <Button variant="text" color="primary" onClick={() => this.openModal('join')}>
+                  <Typography variant="body2" color="primary">Join a Team</Typography>
+                </Button>
+                <Button variant="text" color="primary" onClick={() => this.openModal('create')}>
+                  <Typography variant="body2" color="primary">Create a Team</Typography>
+                </Button>
+              </div>
+            </div> 
+            <TeamList userId={this.props.user}/>  
+            </Paper>
+          )}
         </Grid>
       </div>
     )
