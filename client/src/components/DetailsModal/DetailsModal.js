@@ -42,7 +42,7 @@ class DetailsModal extends Component {
   }
 
   validate() {
-    if(this.state.mapName != '' && this.state.result != '') {
+    if(this.state.mapName !== '' && this.state.result !== '') {
       this.setState({ notValidated: false });
     } else {
       this.setState({ notValidated: true });

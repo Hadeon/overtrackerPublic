@@ -32,6 +32,8 @@ class Team extends Component{
     .then(res => {
       this.setState({ valid: res[0].teamMembers.includes(this.props.user), teamName: res[0].teamName });
       console.log(res[0])
+    }).catch((err) => {
+      console.log('Not logged in');
     })
   }
 
@@ -56,16 +58,12 @@ class Team extends Component{
           <Paper style={paper}>
           <Typography variant="title" color="inherit">{this.state.teamName}</Typography>
           </Paper>
-          <Paper style={paper}>
-            <Typography variant="body1" color="primary">{this.props.user}</Typography>
+          <Paper style={teamOptions}>
+            <Button variant="raised" color="primary" style={optionsButton}>Invite Users</Button>
+            <Button variant="raised" color="primary" style={optionsButton}>User Roles</Button>
+            <Button onClick={this.openModal} variant="raised" color="secondary" style={addMatch}>Add Match Record</Button>
           </Paper>
-          <Paper style={paper}>
-            <Typography variant="title" style={{marginBottom: '10px'}}>Add Match Record</Typography>
-            <Button onClick={this.openModal} variant="fab" color="primary">
-              <AddIcon/>
-            </Button>
-            <DetailsModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
-          </Paper>
+          <DetailsModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
           <Paper style={paper}>
             <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
           </Paper>
@@ -92,6 +90,20 @@ const paper = {
   padding: '25px',
   width: '80%',
   textAlign: 'center'
+}
+
+const teamOptions = {
+  margin: '10px',
+  padding: '25px',
+  width: '80%'
+}
+
+const optionsButton = {
+  margin: '0 10px 0 10px'
+}
+
+const addMatch = {
+  float: 'right'
 }
 
 Team.propTypes = {
