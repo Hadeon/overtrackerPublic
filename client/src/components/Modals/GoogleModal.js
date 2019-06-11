@@ -5,7 +5,7 @@ import { GoogleLogout } from 'react-google-login';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setUser, getUser } from '../_actions/userActions';
+import { setUser, getUser } from '../../_actions/userActions';
 
 const responseFailure = (res) => {
   console.log(res);

@@ -10,10 +10,10 @@ import Paper from '@material-ui/core/Paper';
 import HeroSelect from './HeroSelect';
 import MapResult from './MapResult';
 
-import Anubis from '../../assets/Anubis.png';
-import Volskaya from '../../assets/Volskaya.jpg';
+import Anubis from '../../../assets/Anubis.png';
+import Volskaya from '../../../assets/Volskaya.jpg';
 
-import * as constants from '../../constants/index';
+import * as constants from '../../../constants/index';
 
 class DetailsModal extends Component {
   state = {

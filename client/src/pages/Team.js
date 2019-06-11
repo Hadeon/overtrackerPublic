@@ -14,8 +14,8 @@ import { getItems } from '../_actions/itemActions';
 
 import NavBar from '../components/NavBar';
 import MapStatistics from '../components/MapStatistics';
-import DetailsModal from '../components/DetailsModal/DetailsModal';
-import InviteModal from '../components/InviteModal';
+import DetailsModal from '../components/Modals/DetailsModal/DetailsModal';
+import InviteModal from '../components/Modals/InviteModal';
 
 import MapPercentageChart from '../components/MapPercentageChart';
 

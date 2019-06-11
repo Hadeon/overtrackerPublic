@@ -11,7 +11,7 @@ import { getItems } from '../_actions/itemActions';
 
 import NavBar from '../components/NavBar';
 import TeamList from '../components/TeamList';
-import TeamModal from '../components/TeamModal';
+import TeamModal from '../components/Modals/TeamModal';
 
 class Dashboard extends Component{
   state = {

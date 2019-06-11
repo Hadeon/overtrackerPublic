@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
-import * as constants from '../constants/index';
+import * as constants from '../../constants/index';
 
 class TeamModal extends Component{
   constructor(props) {

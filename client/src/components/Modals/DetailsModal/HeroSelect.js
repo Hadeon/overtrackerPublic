@@ -4,7 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import { heroList } from '../../constants';
+import { heroList } from '../../../constants';
 
 class HeroSelect extends Component {
   render(){
