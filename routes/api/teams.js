@@ -45,9 +45,8 @@ router.post('/invite', (req, res) => {
 
   // Need to use req.body.userId to identify if the user is the Team's creatorId
   // If it is, then continue with the Invite creation, if not, then res 'Not authorized'
-
   const invite = new Invite(req.body);
-  Invite.save().then(invite => {
+  invite.save().then(invite => {
     res.json(invite);
   }).catch(err => {
     res.status(400).send('Not authorized to create invite code');

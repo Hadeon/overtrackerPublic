@@ -49,22 +49,18 @@ class Dashboard extends Component{
             Create or join a team in order to begin tracking match statistics. In order to join a team, that team's admins must send you an invitation code. Once you've joined a team the admins of that team can link your userId with the data being tracked so that you can have your own personal statistics page. This way you can see data across all your teams and track your progress over time.</Typography>
           </Paper>
           {(this.props.user === '') ? (
-            <Paper style={paper}><Typography variant="body1" color="secondary">In order to access your data please login with Google</Typography></Paper>
+            <Paper style={paper}><Typography variant="body1" color="secondary">In order to access your data please login with Google.</Typography></Paper>
           ) : ( 
             <Paper style={paper}>
             <TeamModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} message={this.state.message} modal={this.state.modal}/>
             <div style={teamHeader}>
-              <div style={{teamTitle}}>
-                <p>My Teams</p>
-              </div>
-              <div style={teamButtons}>
-                <Button variant="text" color="primary" onClick={() => this.openModal('create')}>
-                  <Typography variant="body2" color="primary">Create a Team</Typography>
+                <Button variant="raised" color="primary" onClick={() => this.openModal('create')} style={teamButtons}>
+                  Create a Team
                 </Button>
-                <Button variant="text" color="primary" onClick={() => this.openModal('join')}>
-                  <Typography variant="body2" color="primary">Join a Team</Typography>
+                <Button variant="raised" color="primary" onClick={() => this.openModal('join')} style={teamButtons}>
+                  Join a Team
                 </Button>
-              </div>
+                <Typography variant="body1" color="secondary" style={teamMessage}>In order to join a team, ask the team's creator to send you an Invite Code.</Typography>
             </div> 
             <TeamList userId={this.props.user}/>  
             </Paper>
@@ -84,19 +80,16 @@ const paper = {
 const teamHeader = {
   display: 'flex', 
   flexDirection: 'row', 
-  padding: '5px',
+  padding: '5px 5px 25px 5px',
   position: 'relative'
 }
 
-const teamTitle = {
-  margin: 0,
-  position: 'absolute',
-  top: '50%',
-  transform: 'translateY(-50%)'
+const teamMessage = {
+  marginTop: '10px'
 }
 
 const teamButtons = {
-  marginLeft: '50px'
+  marginRight: '25px'
 }
 
 Dashboard.propTypes = {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 
 import { mapList, apiRoute } from '../constants';
@@ -15,13 +15,18 @@ import { getItems } from '../_actions/itemActions';
 import NavBar from '../components/NavBar';
 import MapStatistics from '../components/MapStatistics';
 import DetailsModal from '../components/DetailsModal/DetailsModal';
+import InviteModal from '../components/InviteModal';
 
 import MapPercentageChart from '../components/MapPercentageChart';
+
+import * as constants from '../constants/index';
 
 class Team extends Component{
 
   state = {
-    open: false,
+    detailsOpen: false,
+    inviteOpen: false,
+    inviteCode: '',
     valid: false,
     teamName: ''
   };
@@ -30,8 +35,8 @@ class Team extends Component{
     fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}/${this.props.user}`)
     .then(res => res.json())
     .then(res => {
+      // This needs to be checked on the server side
       this.setState({ valid: res[0].teamMembers.includes(this.props.user), teamName: res[0].teamName });
-      console.log(res[0])
     }).catch((err) => {
       console.log('Not logged in');
     })
@@ -41,12 +46,33 @@ class Team extends Component{
     this.props.getUser();
   }
 
-  openModal = () => {
-    this.setState({ open: true });
+  openDetailsModal = () => {
+    this.setState({ detailsOpen: true });
   }
 
-  closeModal = () => {
-    this.setState({ open: false });
+  closeDetailsModal = () => {
+    this.setState({ detailsOpen: false });
+  }
+
+  openInviteModal = () => {
+    let data = {
+      creatorId: this.props.user,
+      teamId: this.props.match.params.teamId,
+      active: true
+    }
+    axios
+      .post(`${constants.apiRoute}/api/teams/invite`, data)
+      .then((res) => {
+        this.setState({ inviteCode: res.data._id })
+      })
+      .then(() =>  this.setState({ inviteOpen: true }))
+      .catch(err => {
+        console.error(err);
+    });
+  }
+
+  closeInviteModal = () => {
+    this.setState({ inviteOpen: false });
   }
   
   render(){
@@ -59,11 +85,12 @@ class Team extends Component{
           <Typography variant="title" color="inherit">{this.state.teamName}</Typography>
           </Paper>
           <Paper style={teamOptions}>
-            <Button variant="raised" color="primary" style={optionsButton}>Invite Users</Button>
+            <Button onClick={this.openInviteModal} variant="raised" color="primary" style={optionsButton}>Invite Users</Button>
             <Button variant="raised" color="primary" style={optionsButton}>User Roles</Button>
-            <Button onClick={this.openModal} variant="raised" color="secondary" style={addMatch}>Add Match Record</Button>
+            <Button onClick={this.openDetailsModal} variant="raised" color="secondary" style={addMatch}>Add Match Record</Button>
           </Paper>
-          <DetailsModal isOpen={this.state.open} closeModal={this.closeModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
+          <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
+          <InviteModal isOpen={this.state.inviteOpen} closeModal={this.closeInviteModal} inviteCode={this.state.inviteCode}/>
           <Paper style={paper}>
             <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
           </Paper>
