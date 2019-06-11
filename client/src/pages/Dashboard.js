@@ -17,7 +17,8 @@ class Dashboard extends Component{
   state = {
     open: false,
     modal: '',
-    message: ''
+    message: '',
+    key: ''
   };
 
   openModal = (modalAction) => {
@@ -32,7 +33,7 @@ class Dashboard extends Component{
   }
 
   closeModal = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, key: Math.random() });
   }
 
   render(){
@@ -62,7 +63,7 @@ class Dashboard extends Component{
                 </Button>
                 <Typography variant="body1" color="secondary" style={teamMessage}>In order to join a team, ask the team's creator to send you an Invite Code.</Typography>
             </div> 
-            <TeamList userId={this.props.user}/>  
+            <TeamList userId={this.props.user} key={this.state.key}/>  
             </Paper>
           )}
         </Grid>

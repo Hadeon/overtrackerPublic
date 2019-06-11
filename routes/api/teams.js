@@ -55,8 +55,46 @@ router.post('/invite', (req, res) => {
 
 // Join team
 
-router.put('/join/:inviteCode', (req, res) => {
-
+router.post('/join', (req, res) => {
+  // Lookup Invite
+  Invite.findById(req.body.code, function(err, invite) {
+    // Check if Invite is active
+    if(err) {
+      res.status(400).send('This code is invalid');
+    } 
+    else if(invite.active === true){
+      let teamId = invite.teamId;
+      let users = [];
+      Team.find({ _id: teamId }).then((team) => {
+        console.log(team);
+        users = team[0].teamMembers
+      }).then(() => {
+        // Lookup the team and check if the user already has access in the userAccess array
+        if(users.includes(req.body.userId) === false) {
+          // If user is not in the userAccess array, add the user
+          Team.findByIdAndUpdate(teamId, { $push: { teamMembers: req.body.userId }}, function (err, success) {
+            if(err) { 
+              console.log(err);
+            } else {
+              // Deactivate the Invite so it cannot be used again
+              Invite.findByIdAndUpdate(req.body.code, { $set: { active: false }}, function (err, success) {
+                if(err) {
+                  console.log(err);
+                } else {
+                  console.log('Invite code used');
+                }
+              });
+              res.send('Team Access updated');
+            }
+          });
+        } else {
+          console.log('User already in team');
+        }
+      })
+    } else {
+      res.status(400).send('This code is invalid');
+    }
+  })
   // Find the Invite by Id, if the Invite.active === true
   // .then lookup Team._id by the Invite.teamId and add the req.body.userId to the Team.userAccess array 
   // .then findByIdAndUpdate the Invite and set Invite.active to false so that this code can't be used again

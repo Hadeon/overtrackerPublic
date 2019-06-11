@@ -15,7 +15,8 @@ class TeamModal extends Component{
     super(props);
     this.state = {
       input: '',
-      notValidated: true
+      notValidated: true,
+      error: ''
     }
   }
 
@@ -37,14 +38,16 @@ class TeamModal extends Component{
   }
 
   handleJoin() {
-    // let teamName = this.state.input;
-    // axios
-    //   .post(`${constants.apiRoute}/api/teams/add`, teamName)
-    //   .then(() => console.log('Team Created'))
-    //   .then(() => this.props.closeModal())
-    //   .catch(err => {
-    //     console.error(err);
-    //   });
+    let inviteCode = { 
+      code: this.state.input,
+      userId: this.props.userId
+    };
+    axios
+      .post(`${constants.apiRoute}/api/teams/join`, inviteCode)
+      .then(() => this.props.closeModal())
+      .catch(err => {
+        this.setState({ err: 'Invalid' })
+      });
   }
 
   handleCreate() {
@@ -59,7 +62,7 @@ class TeamModal extends Component{
   }
 
   close = () => {
-    this.setState({ input: '' });
+    this.setState({ input: '', err: '' });
     this.props.closeModal();
   }
 
@@ -77,7 +80,7 @@ class TeamModal extends Component{
           </Paper>
           <Paper className={classes.mainContainer}>
             {this.props.modal === 'join' ? ( 
-              <Button variant="raised" color="primary" onClick={() => this.handleJoin}>
+              <Button variant="raised" color="primary" onClick={() => this.handleJoin()} disabled={this.state.notValidated}>
                 Join Team
               </Button>
             ) : (
@@ -85,6 +88,7 @@ class TeamModal extends Component{
                 Create Team
               </Button>
             )}
+            <Typography color="secondary">{this.state.err}</Typography>
           </Paper>
         </Paper>
       </Modal>

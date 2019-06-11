@@ -22,6 +22,8 @@ export default class TeamList extends Component{
       teams.push([team._id, team.teamName]);
     })).then(() => {
       this.setState({ userTeams: teams });
+    }).catch((err) => {
+      
     })
   }
 

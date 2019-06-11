@@ -35,7 +35,6 @@ class Team extends Component{
     fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}/${this.props.user}`)
     .then(res => res.json())
     .then(res => {
-      // This needs to be checked on the server side
       this.setState({ valid: res[0].teamMembers.includes(this.props.user), teamName: res[0].teamName });
     }).catch((err) => {
       console.log('Not logged in');
