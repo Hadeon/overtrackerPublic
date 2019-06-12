@@ -21,6 +21,10 @@ const MatchSchema = new Schema({
          type: String,
          required: false
       },
+      score: {
+         type: String,
+         required: false
+      },
       map: {
          type: String,
          required: false

@@ -36,7 +36,7 @@ export default class MatchHistory extends Component{
           <Paper style={subSection}>
             <Link key={match[0]} to={`/team/${match[0]}`} style={teamLink}>
               <Button variant="text" matchId={match[0]} style={teamButton}>
-                {match[1]} -- {match[2]}
+                {match[3].replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1')} -- {match[1]} -- Result: {match[2]}
               </Button>
             </Link>
           </Paper>

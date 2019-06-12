@@ -33,6 +33,10 @@ class Team extends Component{
   };
   
   componentWillMount() {
+
+  }
+
+  componentDidMount() {
     fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}/${this.props.user}`)
     .then(res => res.json())
     .then(res => {
@@ -40,10 +44,6 @@ class Team extends Component{
     }).catch((err) => {
       console.log('Not logged in');
     })
-  }
-
-  componentDidMount() {
-    this.props.getUser();
   }
 
   openDetailsModal = () => {
