@@ -16,10 +16,10 @@ export default class MatchHistory extends Component{
 
   componentDidMount() {
     let matches = [];
-    fetch(`${apiRoute}/api/teams/matchHistory/${this.props.teamId}/${this.props.userId}`)
+    fetch(`${apiRoute}/api/matches/${this.props.teamId}`)
     .then(res => res.json())
     .then(data => data.forEach(match => {
-      matches.push([match._id, match.mapName, match.result, match.date]);
+      matches.push([match._id, match.matchDetails.map, match.matchDetails.result, match.date]);
     })).then(() => {
       this.setState({ matchHistory: matches });
     }).catch((err) => {
@@ -35,16 +35,13 @@ export default class MatchHistory extends Component{
         return (
           <Paper style={subSection}>
             <Link key={match[0]} to={`/team/${match[0]}`} style={teamLink}>
-              <Button variant="text" teamId={match[0]} style={teamButton}>
-                <Typography variant="body1" color="textPrimary">{match[1]}</Typography>
+              <Button variant="text" matchId={match[0]} style={teamButton}>
+                {match[1]} -- {match[2]}
               </Button>
             </Link>
           </Paper>
         )
       })}
-      <Paper style={subSection}>
-        <Typography variant="body1" color="textPrimary">Test</Typography>
-      </Paper>
     </div>
     )
   }
@@ -65,5 +62,6 @@ const teamLink = {
 
 const matchHistoryContainer = {
   height: '300px',
-  overflow: 'scroll'
+  overflow: 'scroll',
+  
 }

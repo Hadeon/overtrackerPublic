@@ -64,7 +64,8 @@ class DetailsModal extends Component {
       matchDetails: {
         map: this.state.mapName,
         result: this.state.result,
-      }
+      },
+      date: Date.now
     }
     axios
       .post(`${constants.apiRoute}/api/matches/add`, matchData)
