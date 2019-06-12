@@ -13,6 +13,7 @@ import { getUser } from '../_actions/userActions';
 import { getItems } from '../_actions/itemActions';
 
 import NavBar from '../components/NavBar';
+import MatchHistory from '../components/MatchHistory';
 import MapStatistics from '../components/MapStatistics';
 import DetailsModal from '../components/Modals/DetailsModal/DetailsModal';
 import InviteModal from '../components/Modals/InviteModal';
@@ -90,6 +91,9 @@ class Team extends Component{
           </Paper>
           <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
           <InviteModal isOpen={this.state.inviteOpen} closeModal={this.closeInviteModal} inviteCode={this.state.inviteCode}/>
+          <Paper style={paper}>
+            <MatchHistory teamId={this.props.match.params.teamId} userId={this.props.user}/>
+          </Paper>
           <Paper style={paper}>
             <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
           </Paper>
