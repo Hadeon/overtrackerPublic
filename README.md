@@ -11,6 +11,8 @@ Additionally, as I had to split the app in two for Heroku, there's some configur
 FUTURE UPDATES:
 
   -- Reorganize the Teams landing page. Work on some UX designs to streamline how the previous matches/charts appear.
+    -- Look to Discord/Facebook and display the match history in a left column, with the users in a right column or at the bottom of the left.
+    -- Make this mobile friendly and flex the box into the current centered box layout.
   -- Create a Match page which will be dynamically rendered for each of the matches in the MatchHistory
   -- Add a Date field for the MatchDetails modal and utilize this for the Match.date instead of Date.now
   -- Create a TeamMembers component which will display somewhere on the Team page so you can see how many members there are / who has joined
