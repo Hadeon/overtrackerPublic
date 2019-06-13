@@ -16,6 +16,13 @@ const disabledStyle = {
   borderStyle: 'none',
 }
 
+// https://developers.google.com/identity/sign-in/web/backend-auth
+
+// Replace userId with authentication using an ID token
+// getAuthResponse().id_token
+
+// Create users collection and use those _id's for the team members/whatnot instead of the userId. Simply store that user's data in the document instead of just setting state with the userId
+
 class GoogleModal extends Component{
 
   responseSuccess = (res) => {
