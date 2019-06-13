@@ -10,10 +10,10 @@ Additionally, as I had to split the app in two for Heroku, there's some configur
 
 FUTURE UPDATES:
 
-  -- Determine how much data we are currently entering into the DetailsModal before creating the DB model
-  -- Update charts upon saving
-  -- Percentage algorithm for W/L for Bar graph
-  -- Upon clicking a map on the Bar graph, expand that associated accordion and scroll to it
+  -- Reorganize the Teams landing page. Work on some UX designs to streamline how the previous matches/charts appear.
+  -- Create a Match page which will be dynamically rendered for each of the matches in the MatchHistory
+  -- Add a Date field for the MatchDetails modal and utilize this for the Match.date instead of Date.now
+  -- Create a TeamMembers component which will display somewhere on the Team page so you can see how many members there are / who has joined
 
 APP FUNCTIONALITY:
 
