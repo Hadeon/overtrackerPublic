@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-import { Typography } from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { getUser } from '../_actions/userActions';
 
 class Match extends Component {
   render() {
     return (
-      <React.Fragment>
+      <div>
         <Typography variant="title">This is a Match page</Typography>
-      </React.Fragment>
+      </div>
     )
   }
 }
