@@ -20,14 +20,20 @@ class DetailsModal extends Component {
     mapName: '',
     backgroundImage: '',
     result: '',
+    score: '',
     heroOne: '',
     heroTwo: '',
     heroThree: '',
     heroFour: '',
     heroFive: '',
     heroSix: '',
+    matchDate: '',
+    heroesUsed: [],
+    enemyHeroes: [],
     notValidated: true
   }
+
+  // Allow for map grouping with heroes and subMap for Control points
 
   handleChange = e => {
     e.target.name === 'mapName' ? (
