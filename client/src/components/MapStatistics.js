@@ -12,8 +12,7 @@ import PieChart from './PieChart';
 
 const styles = theme => ({
   root: {
-    width: '95%',
-    marginBottom: '10px',
+    margin: '10px',
     zIndex: 1
   },
   heading: {

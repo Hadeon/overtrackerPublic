@@ -80,26 +80,28 @@ class Team extends Component{
       <React.Fragment>
         <NavBar/>
         {( this.state.valid === true ) ? (
-          <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
-          <Paper style={paper}>
-          <Typography variant="title" color="inherit">{this.state.teamName}</Typography>
-          </Paper>
-          <Paper style={teamOptions}>
-            <Button onClick={this.openInviteModal} variant="raised" color="primary" style={optionsButton}>Invite Users</Button>
-            <Button variant="raised" color="primary" style={optionsButton}>User Roles</Button>
-            <Button onClick={this.openDetailsModal} variant="raised" color="secondary" style={addMatch}>Add Match Record</Button>
-          </Paper>
-          <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
-          <InviteModal isOpen={this.state.inviteOpen} closeModal={this.closeInviteModal} inviteCode={this.state.inviteCode}/>
-          <Paper style={paper}>
-            <MatchHistory teamId={this.props.match.params.teamId} userId={this.props.user}/>
-          </Paper>
-          <Paper style={paper}>
-            <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
-          </Paper>
-          {mapList.map((name) => (
-            <MapStatistics mapName={name} key={name}/>
-          ))}
+          <Grid container direction="row" justify="center" alignItems="center" style={flexContainer}>
+            <Paper style={sidebar}>
+              <MatchHistory teamId={this.props.match.params.teamId} userId={this.props.user}/>
+            </Paper>
+            <div style={mainContainer}>
+              <Paper style={paper}>
+              <Typography variant="title" color="inherit">{this.state.teamName}</Typography>
+              </Paper>
+              <Paper style={teamOptions}>
+                <Button onClick={this.openInviteModal} variant="raised" color="primary" style={optionsButton}>Invite Users</Button>
+                <Button variant="raised" color="primary" style={optionsButton}>User Roles</Button>
+                <Button onClick={this.openDetailsModal} variant="raised" color="secondary" style={addMatch}>Add Match Record</Button>
+              </Paper>
+              <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
+              <InviteModal isOpen={this.state.inviteOpen} closeModal={this.closeInviteModal} inviteCode={this.state.inviteCode}/>
+              <Paper style={paper}>
+                <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
+              </Paper>
+              {mapList.map((name) => (
+                <MapStatistics mapName={name} key={name}/>
+              ))}
+            </div>
           </Grid>
         ) : (
           <React.Fragment>
@@ -118,14 +120,12 @@ class Team extends Component{
 const paper = {
   margin: '10px',
   padding: '25px',
-  width: '80%',
   textAlign: 'center'
 }
 
 const teamOptions = {
   margin: '10px',
-  padding: '25px',
-  width: '80%'
+  padding: '25px'
 }
 
 const optionsButton = {
@@ -134,6 +134,24 @@ const optionsButton = {
 
 const addMatch = {
   float: 'right'
+}
+
+const flexContainer = {
+  marginTop: '50px',
+  display: 'flex',
+  flexDirection: 'row'
+}
+
+const sidebar = {
+  flexGrow: '1',
+  width: '200px',
+  height: '80vh',
+  margin: '10px',
+  alignSelf: 'flex-start'
+}
+
+const mainContainer = {
+  width: '75%'
 }
 
 Team.propTypes = {

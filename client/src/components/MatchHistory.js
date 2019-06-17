@@ -27,10 +27,12 @@ export default class MatchHistory extends Component{
     })
   }
 
+  // Change background based on Win or Loss
+
   render() {
     return (
     <div style={matchHistoryContainer}>
-      <Typography variant="title" color="textPrimary">Match History</Typography>
+      <Typography variant="title" color="textPrimary" style={{textAlign: 'center'}}>Match History</Typography>
       {this.state.matchHistory.map(match => {
         return (
           <Paper style={subSection}>
@@ -61,7 +63,7 @@ const teamLink = {
 }
 
 const matchHistoryContainer = {
-  height: '300px',
+  height: '75vh',
   overflow: 'scroll',
-  
+  padding: '25px 10px 0px 10px'
 }
