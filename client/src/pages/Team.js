@@ -146,7 +146,7 @@ const sidebar = {
   flexGrow: '1',
   width: '200px',
   height: '80vh',
-  margin: '10px',
+  margin: '10px 0px 10px 0px',
   alignSelf: 'flex-start'
 }
 
