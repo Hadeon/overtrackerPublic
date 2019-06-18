@@ -4,7 +4,6 @@ import GoogleLogin from 'react-google-login';
 import { GoogleLogout } from 'react-google-login';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { setUser, getUser } from '../../_actions/userActions';
 
 const responseFailure = (res) => {
@@ -31,7 +30,7 @@ class GoogleModal extends Component{
   }
 
   logout = (res) => {
-    this.props.setUser('test');
+    this.props.setUser('');
     console.log('Logout triggered')
   }
 

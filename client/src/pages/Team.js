@@ -31,10 +31,6 @@ class Team extends Component{
     valid: false,
     teamName: ''
   };
-  
-  componentWillMount() {
-
-  }
 
   componentDidMount() {
     fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}/${this.props.user}`)
