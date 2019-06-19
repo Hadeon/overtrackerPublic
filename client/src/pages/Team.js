@@ -28,7 +28,7 @@ class Team extends Component{
     detailsOpen: false,
     inviteOpen: false,
     inviteCode: '',
-    valid: false,
+    valid: true,
     teamName: ''
   };
 
@@ -141,9 +141,11 @@ const flexContainer = {
 const sidebar = {
   flexGrow: '1',
   width: '200px',
-  height: '80vh',
-  margin: '10px 0px 10px 0px',
-  alignSelf: 'flex-start'
+  height: '100%',
+  margin: '0px 0px 10px 0px',
+  paddingTop: '40px',
+  alignSelf: 'flex-start',
+  backgroundColor: '#222'
 }
 
 const mainContainer = {
