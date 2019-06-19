@@ -25,8 +25,9 @@ const disabledStyle = {
 class GoogleModal extends Component{
 
   responseSuccess = (res) => {
+    let id_token = res.getAuthResponse().id_token;
     this.props.setUser(res.googleId);
-    console.log('Login triggered');
+    console.log('Login triggered: ' + id_token);
   }
 
   logout = (res) => {
