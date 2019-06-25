@@ -45,6 +45,7 @@ class DetailsModal extends Component {
     setTimeout(() => {
       this.validate()
     }, 500)
+    console.log(this.state);
   }
 
   validate() {
@@ -70,6 +71,14 @@ class DetailsModal extends Component {
       matchDetails: {
         map: this.state.mapName,
         result: this.state.result,
+        allyHeroes: [
+          this.state.heroOne,
+          this.state.heroTwo,
+          this.state.heroThree,
+          this.state.heroFour,
+          this.state.heroFive,
+          this.state.heroSix
+        ]
       },
       date: Date.now
     }

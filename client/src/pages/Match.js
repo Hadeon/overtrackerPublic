@@ -9,7 +9,7 @@ class Match extends Component {
   render() {
     return (
       <div>
-        <Typography variant="title">This is a Match page</Typography>
+        <Typography variant="title">{this.props.match.params.matchId}</Typography>
       </div>
     )
   }

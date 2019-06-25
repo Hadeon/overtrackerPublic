@@ -36,8 +36,8 @@ export default class MatchHistory extends Component{
           let result = (match[2] === 'Win') ? win : loss;
           return (
             <Paper style={result}>
-              <Link key={match[0]} to={`/team/${match[0]}`} style={teamLink}>
-                <Button variant="text" matchId={match[0]} style={teamButton}>
+              <Link key={match[0]} to={`/team/match/${match[0]}`} style={teamLink}>
+                <Button variant="text" style={teamButton}>
                   {match[3].replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1')} -- {match[1]} -- Result: {match[2]}
                 </Button>
               </Link>

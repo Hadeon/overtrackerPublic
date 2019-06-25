@@ -28,8 +28,9 @@ class Team extends Component{
     detailsOpen: false,
     inviteOpen: false,
     inviteCode: '',
-    valid: true,
-    teamName: ''
+    valid: false,
+    teamName: '',
+    key: ''
   };
 
   componentDidMount() {
@@ -47,7 +48,7 @@ class Team extends Component{
   }
 
   closeDetailsModal = () => {
-    this.setState({ detailsOpen: false });
+    this.setState({ detailsOpen: false, key: Math.random() });
   }
 
   openInviteModal = () => {
@@ -76,7 +77,7 @@ class Team extends Component{
       <React.Fragment>
         <NavBar/>
         {( this.state.valid === true ) ? (
-          <Grid container direction="row" justify="center" alignItems="center" style={flexContainer}>
+          <Grid container direction="row" justify="center" alignItems="center" style={flexContainer} key={this.state.key}>
             <Paper style={sidebar}>
               <MatchHistory teamId={this.props.match.params.teamId} userId={this.props.user}/>
             </Paper>

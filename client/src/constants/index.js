@@ -3,19 +3,20 @@ export const mapList = [
   'Volskaya',
   'Hanamura',
   'Horizon',
-  'Hollywood',
-  'Eichenwald',
   'Dorado',
   'Route 66',
-  'King\'s Row',
   'Gibraltar',
+  'Havana',
+  'Hollywood',
+  'Eichenwald',
+  'Numbani',
+  'King\'s Row',
   'Ilios',
   'Nepal',
   'Oasis',
   'Busan',
   'Lijiang',
-  'Rialto',
-  'Havana'
+  'Rialto'
 ]
 
 export const heroList = [
