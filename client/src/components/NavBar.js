@@ -61,7 +61,7 @@ class NavBar extends Component {
               <MenuItem component={Link} to="/contact" onClick={this.handleClose}>Contact</MenuItem>
           </Menu>
           <Typography variant="title" color="inherit" className={classes.grow}>
-            Welcome
+            {this.props.navHeader}
           </Typography>
           <GoogleModal/>
         </Toolbar>

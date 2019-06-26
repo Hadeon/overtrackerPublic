@@ -20,8 +20,6 @@ import InviteModal from '../components/Modals/InviteModal';
 
 import MapPercentageChart from '../components/MapPercentageChart';
 
-import * as constants from '../constants/index';
-
 class Team extends Component{
 
   state = {
@@ -58,7 +56,7 @@ class Team extends Component{
       active: true
     }
     axios
-      .post(`${constants.apiRoute}/api/teams/invite`, data)
+      .post(`${apiRoute}/api/teams/invite`, data)
       .then((res) => {
         this.setState({ inviteCode: res.data._id })
       })
@@ -75,7 +73,7 @@ class Team extends Component{
   render(){
     return(
       <React.Fragment>
-        <NavBar/>
+        <NavBar navHeader={this.state.teamName}/>
         {( this.state.valid === true ) ? (
           <Grid container direction="row" justify="center" alignItems="center" style={flexContainer} key={this.state.key}>
             <Paper style={sidebar}>
