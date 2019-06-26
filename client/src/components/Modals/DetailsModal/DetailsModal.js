@@ -36,6 +36,11 @@ class DetailsModal extends Component {
   // Allow for map grouping with heroes and subMap for Control points
 
   // If the props.matchId !== 0 then query the DB for the match details
+  componentDidMount() {
+    if(this.props.matchId !== 0 ){
+      console.log('Load Match Data.')
+    }
+  }
 
   handleChange = e => {
     e.target.name === 'mapName' ? (

@@ -29,7 +29,9 @@ class Team extends Component{
     valid: false,
     teamName: '',
     key: '',
-    matchId: 0
+    matchId: 0,
+    detailsKey: '',
+    matchData: {}
   };
 
   componentDidMount() {
@@ -51,7 +53,7 @@ class Team extends Component{
   }
 
   setMatchId = (id) => {
-    this.setState({ matchId: id, detailsOpen: true })
+    this.setState({ matchId: id, detailsKey: Math.random(), detailsOpen: true })
   }
 
   openInviteModal = () => {
@@ -93,7 +95,7 @@ class Team extends Component{
                 <Button variant="raised" color="primary" style={optionsButton}>User Roles</Button>
                 <Button onClick={this.openDetailsModal} variant="raised" color="secondary" style={addMatch}>Add Match Record</Button>
               </Paper>
-              <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId} matchId={this.state.matchId}/>
+              <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId} matchId={this.state.matchId} key={this.state.detailsKey}/>
               <InviteModal isOpen={this.state.inviteOpen} closeModal={this.closeInviteModal} inviteCode={this.state.inviteCode}/>
               <Paper style={paper}>
                 <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
