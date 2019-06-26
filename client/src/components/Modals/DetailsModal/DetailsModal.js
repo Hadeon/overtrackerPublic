@@ -35,6 +35,8 @@ class DetailsModal extends Component {
 
   // Allow for map grouping with heroes and subMap for Control points
 
+  // If the props.matchId !== 0 then query the DB for the match details
+
   handleChange = e => {
     e.target.name === 'mapName' ? (
       this.setState({ mapName: e.target.value }),
@@ -98,7 +100,7 @@ class DetailsModal extends Component {
         <div className={classes.backgroundImage} style={{backgroundImage: this.state.backgroundImage}}>
           <Button onClick={this.props.closeModal} variant="fab" mini color="secondary" className={classes.closeButton}>X</Button>
           <Typography variant="title" id="modal-title" style={{ marginBottom: '50px' }}>
-            Post Game Data
+            Post Game Data for: {this.props.matchId}
           </Typography>
           <Paper className={classes.mainContainer}>
             <MapResult 

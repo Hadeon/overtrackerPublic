@@ -28,7 +28,8 @@ class Team extends Component{
     inviteCode: '',
     valid: false,
     teamName: '',
-    key: ''
+    key: '',
+    matchId: 0
   };
 
   componentDidMount() {
@@ -46,7 +47,11 @@ class Team extends Component{
   }
 
   closeDetailsModal = () => {
-    this.setState({ detailsOpen: false, key: Math.random() });
+    this.setState({ detailsOpen: false, key: Math.random(), matchId: 0 });
+  }
+
+  setMatchId = (id) => {
+    this.setState({ matchId: id, detailsOpen: true })
   }
 
   openInviteModal = () => {
@@ -77,7 +82,7 @@ class Team extends Component{
         {( this.state.valid === true ) ? (
           <Grid container direction="row" justify="center" alignItems="center" style={flexContainer} key={this.state.key}>
             <Paper style={sidebar}>
-              <MatchHistory teamId={this.props.match.params.teamId} userId={this.props.user}/>
+              <MatchHistory teamId={this.props.match.params.teamId} userId={this.props.user} setMatchId={this.setMatchId}/>
             </Paper>
             <div style={mainContainer}>
               <Paper style={paper}>
@@ -88,7 +93,7 @@ class Team extends Component{
                 <Button variant="raised" color="primary" style={optionsButton}>User Roles</Button>
                 <Button onClick={this.openDetailsModal} variant="raised" color="secondary" style={addMatch}>Add Match Record</Button>
               </Paper>
-              <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
+              <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId} matchId={this.state.matchId}/>
               <InviteModal isOpen={this.state.inviteOpen} closeModal={this.closeInviteModal} inviteCode={this.state.inviteCode}/>
               <Paper style={paper}>
                 <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
