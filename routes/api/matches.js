@@ -3,18 +3,14 @@ const router = express.Router();
 
 const Match = require('../../models/Match.js');
 
-// @route GET api/matches
-// Get All Matches by the userId
-
-// router.get('/:userId', (req, res) => {
-//   console.log('User API hit');
-//   Match.find({ creatorId : req.params.userId })
-//   .sort({ date: -1 })
-//   .then(matches => res.json(matches))
-//   .catch((err) => {
-//     res.redirect('/')
-//   })
-// });
+router.get('/details/:matchId', (req, res) => {
+  console.log('Match lookup API hit');
+  Match.find({ _id : req.params.matchId })
+    .then(match => res.json(match))
+    .catch((err) => {
+      res.redirect('/')
+    })
+})
 
 router.get('/:teamId', (req, res) => {
   console.log('Team Matches API hit');

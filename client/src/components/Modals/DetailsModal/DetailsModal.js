@@ -38,7 +38,24 @@ class DetailsModal extends Component {
   // If the props.matchId !== 0 then query the DB for the match details
   componentDidMount() {
     if(this.props.matchId !== 0 ){
-      console.log('Load Match Data.')
+      fetch(`${constants.apiRoute}/api/matches/details/${this.props.matchId}`)
+      .then(res => res.json())
+      .then(res => {
+        let details = res[0].matchDetails;
+        this.setState({ 
+          mapName: details.map, 
+          result: details.result,
+          heroOne: details.allyHeroes[0],
+          heroTwo: details.allyHeroes[1],
+          heroThree: details.allyHeroes[2],
+          heroFour: details.allyHeroes[3],
+          heroFive: details.allyHeroes[4],
+          heroSix: details.allyHeroes[5],
+          notValidated: false
+        })
+      }).catch((err) => {
+        console.log(err);
+      })
     }
   }
 
@@ -105,7 +122,7 @@ class DetailsModal extends Component {
         <div className={classes.backgroundImage} style={{backgroundImage: this.state.backgroundImage}}>
           <Button onClick={this.props.closeModal} variant="fab" mini color="secondary" className={classes.closeButton}>X</Button>
           <Typography variant="title" id="modal-title" style={{ marginBottom: '50px' }}>
-            Post Game Data for: {this.props.matchId}
+            Match Details
           </Typography>
           <Paper className={classes.mainContainer}>
             <MapResult 
@@ -123,9 +140,15 @@ class DetailsModal extends Component {
             ))}
           </Paper>
           <Paper className={classes.mainContainer}>
-            <Button variant="raised" color="primary" onClick={() => {this.postData(this.props.userId, this.props.teamId)}} disabled={this.state.notValidated}>
-              Submit Match
-            </Button>
+            {(this.props.matchId === 0 ) ? (
+              <Button variant="raised" color="primary" onClick={() => {this.postData(this.props.userId, this.props.teamId)}} disabled={this.state.notValidated}>
+                Submit Match
+              </Button>
+            ) : (
+              <Button variant="raised" color="primary" onClick={() => {}} disabled={this.state.notValidated}>
+                Update Match
+              </Button>
+            )}
           </Paper>
         </div>
       </Modal>
