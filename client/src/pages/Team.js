@@ -27,6 +27,7 @@ class Team extends Component{
     inviteOpen: false,
     inviteCode: '',
     valid: false,
+    loading: true,
     teamName: '',
     key: '',
     matchId: 0,
@@ -38,8 +39,9 @@ class Team extends Component{
     fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}/${this.props.user}`)
     .then(res => res.json())
     .then(res => {
-      this.setState({ valid: res[0].teamMembers.includes(this.props.user), teamName: res[0].teamName });
+      this.setState({ valid: res[0].teamMembers.includes(this.props.user), teamName: res[0].teamName, loading: false });
     }).catch((err) => {
+      this.setState({ loading: false })
       console.log('Not logged in');
     })
   }
@@ -108,8 +110,12 @@ class Team extends Component{
         ) : (
           <React.Fragment>
             <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
-              <Paper style={paper}>
-                <Typography variant="body1" color="secondary">Not Authorized.</Typography>
+              <Paper style={paper}> 
+                {( this.state.loading === true) ? (
+                  <Typography variant="title">Loading...</Typography>
+                ) : (
+                  <Typography variant="body1" color="secondary">Not Authorized.</Typography>
+                )}
               </Paper>
             </Grid>
           </React.Fragment>
