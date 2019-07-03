@@ -29,21 +29,31 @@ export default class MatchHistory extends Component{
 
   render() {
     return (
-    <div style={matchHistoryContainer}>
-      <Typography variant="title" style={{textAlign: 'center', color: '#fff', marginBottom: '25px'}}>Match History</Typography>
-      {this.state.matchHistory.map(match => {
-        let result = (match[2] === 'Win') ? win : loss;
-        return (
-          <Paper style={result}>
-            <Link key={match[0]} to={`/team/${match[0]}`} style={teamLink}>
-              <Button variant="text" matchId={match[0]} style={teamButton}>
-                {match[3].replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1')} -- {match[1]} -- Result: {match[2]}
-              </Button>
-            </Link>
-          </Paper>
-        )
-      })}
-    </div>
+    <React.Fragment>
+        <Typography variant="title" style={{textAlign: 'center', color: '#fff', marginBottom: '25px'}}>Match History</Typography>
+        <div style={matchHistoryContainer}>
+        {this.state.matchHistory.map(match => {
+          let result = (match[2] === 'Win') ? win : loss;
+          return (
+            <Paper style={result}>
+              {/* <Link key={match[0]} to={`/team/match/${match[0]}`} style={teamLink}> */}
+                <Button variant="text" style={teamButton} onClick={() => {this.props.setMatchId(match[0])}}>
+                  {match[3].replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1')} -- {match[1]} -- Result: {match[2]}
+                </Button>
+              {/* </Link> */}
+            </Paper>
+          )
+        })}
+      </div>
+      <div style={teamMembersContainer}>
+        <Typography variant="title" style={{textAlign: 'center', color: '#fff', marginBottom: '25px'}}>Team Members</Typography>
+        <Paper style={{ padding: '10px'}}>
+          <Typography variant="body1">Avecus</Typography>
+          <Typography variant="body1">Tibby</Typography>
+          <Typography variant="body1">Drezak</Typography>
+        </Paper>
+      </div>
+    </React.Fragment>
     )
   }
 }
@@ -58,10 +68,15 @@ const teamLink = {
 }
 
 const matchHistoryContainer = {
-  height: '75vh',
+  height: '45vh',
+  overflowY: 'scroll',
+  padding: '0px 10px 0px 10px'
+}
+
+const teamMembersContainer = {
+  height: '45vh',
   overflow: 'scroll',
-  padding: '25px 10px 15px 10px',
-  backgroundColor: '#222'
+  padding: '25px 10px 15px 10px'
 }
 
 const win = {

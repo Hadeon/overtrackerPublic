@@ -20,8 +20,6 @@ import InviteModal from '../components/Modals/InviteModal';
 
 import MapPercentageChart from '../components/MapPercentageChart';
 
-import * as constants from '../constants/index';
-
 class Team extends Component{
 
   state = {
@@ -29,15 +27,21 @@ class Team extends Component{
     inviteOpen: false,
     inviteCode: '',
     valid: false,
-    teamName: ''
+    loading: true,
+    teamName: '',
+    key: '',
+    matchId: 0,
+    detailsKey: '',
+    matchData: {}
   };
 
   componentDidMount() {
     fetch(`${apiRoute}/api/teams/teamMember/${this.props.match.params.teamId}/${this.props.user}`)
     .then(res => res.json())
     .then(res => {
-      this.setState({ valid: res[0].teamMembers.includes(this.props.user), teamName: res[0].teamName });
+      this.setState({ valid: res[0].teamMembers.includes(this.props.user), teamName: res[0].teamName, loading: false });
     }).catch((err) => {
+      this.setState({ loading: false })
       console.log('Not logged in');
     })
   }
@@ -47,7 +51,11 @@ class Team extends Component{
   }
 
   closeDetailsModal = () => {
-    this.setState({ detailsOpen: false });
+    this.setState({ detailsOpen: false, key: Math.random(), matchId: 0 });
+  }
+
+  setMatchId = (id) => {
+    this.setState({ matchId: id, detailsKey: Math.random(), detailsOpen: true })
   }
 
   openInviteModal = () => {
@@ -57,7 +65,7 @@ class Team extends Component{
       active: true
     }
     axios
-      .post(`${constants.apiRoute}/api/teams/invite`, data)
+      .post(`${apiRoute}/api/teams/invite`, data)
       .then((res) => {
         this.setState({ inviteCode: res.data._id })
       })
@@ -74,11 +82,11 @@ class Team extends Component{
   render(){
     return(
       <React.Fragment>
-        <NavBar/>
+        <NavBar navHeader={this.state.teamName}/>
         {( this.state.valid === true ) ? (
-          <Grid container direction="row" justify="center" alignItems="center" style={flexContainer}>
+          <Grid container direction="row" justify="center" alignItems="center" style={flexContainer} key={this.state.key}>
             <Paper style={sidebar}>
-              <MatchHistory teamId={this.props.match.params.teamId} userId={this.props.user}/>
+              <MatchHistory teamId={this.props.match.params.teamId} userId={this.props.user} setMatchId={this.setMatchId}/>
             </Paper>
             <div style={mainContainer}>
               <Paper style={paper}>
@@ -89,7 +97,7 @@ class Team extends Component{
                 <Button variant="raised" color="primary" style={optionsButton}>User Roles</Button>
                 <Button onClick={this.openDetailsModal} variant="raised" color="secondary" style={addMatch}>Add Match Record</Button>
               </Paper>
-              <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId}/>
+              <DetailsModal isOpen={this.state.detailsOpen} closeModal={this.closeDetailsModal} userId={this.props.user} teamId={this.props.match.params.teamId} matchId={this.state.matchId} key={this.state.detailsKey}/>
               <InviteModal isOpen={this.state.inviteOpen} closeModal={this.closeInviteModal} inviteCode={this.state.inviteCode}/>
               <Paper style={paper}>
                 <MapPercentageChart userId={this.props.user} teamId={this.props.match.params.teamId}/>
@@ -102,8 +110,12 @@ class Team extends Component{
         ) : (
           <React.Fragment>
             <Grid container direction="row" justify="center" alignItems="center" style={{marginTop: '50px'}}>
-              <Paper style={paper}>
-                <Typography variant="body1" color="secondary">Not Authorized.</Typography>
+              <Paper style={paper}> 
+                {( this.state.loading === true) ? (
+                  <Typography variant="title">Loading...</Typography>
+                ) : (
+                  <Typography variant="body1" color="secondary">Not Authorized.</Typography>
+                )}
               </Paper>
             </Grid>
           </React.Fragment>
@@ -141,9 +153,11 @@ const flexContainer = {
 const sidebar = {
   flexGrow: '1',
   width: '200px',
-  height: '80vh',
-  margin: '10px 0px 10px 0px',
-  alignSelf: 'flex-start'
+  height: '100%',
+  margin: '0px 0px 10px 0px',
+  paddingTop: '40px',
+  alignSelf: 'flex-start',
+  backgroundColor: '#222'
 }
 
 const mainContainer = {

@@ -35,6 +35,30 @@ class DetailsModal extends Component {
 
   // Allow for map grouping with heroes and subMap for Control points
 
+  // If the props.matchId !== 0 then query the DB for the match details
+  componentDidMount() {
+    if(this.props.matchId !== 0 ){
+      fetch(`${constants.apiRoute}/api/matches/details/${this.props.matchId}`)
+      .then(res => res.json())
+      .then(res => {
+        let details = res[0].matchDetails;
+        this.setState({ 
+          mapName: details.map, 
+          result: details.result,
+          heroOne: details.allyHeroes[0],
+          heroTwo: details.allyHeroes[1],
+          heroThree: details.allyHeroes[2],
+          heroFour: details.allyHeroes[3],
+          heroFive: details.allyHeroes[4],
+          heroSix: details.allyHeroes[5],
+          notValidated: false
+        })
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
+  }
+
   handleChange = e => {
     e.target.name === 'mapName' ? (
       this.setState({ mapName: e.target.value }),
@@ -45,6 +69,7 @@ class DetailsModal extends Component {
     setTimeout(() => {
       this.validate()
     }, 500)
+    console.log(this.state);
   }
 
   validate() {
@@ -70,6 +95,14 @@ class DetailsModal extends Component {
       matchDetails: {
         map: this.state.mapName,
         result: this.state.result,
+        allyHeroes: [
+          this.state.heroOne,
+          this.state.heroTwo,
+          this.state.heroThree,
+          this.state.heroFour,
+          this.state.heroFive,
+          this.state.heroSix
+        ]
       },
       date: Date.now
     }
@@ -89,7 +122,7 @@ class DetailsModal extends Component {
         <div className={classes.backgroundImage} style={{backgroundImage: this.state.backgroundImage}}>
           <Button onClick={this.props.closeModal} variant="fab" mini color="secondary" className={classes.closeButton}>X</Button>
           <Typography variant="title" id="modal-title" style={{ marginBottom: '50px' }}>
-            Post Game Data
+            Match Details
           </Typography>
           <Paper className={classes.mainContainer}>
             <MapResult 
@@ -107,9 +140,15 @@ class DetailsModal extends Component {
             ))}
           </Paper>
           <Paper className={classes.mainContainer}>
-            <Button variant="raised" color="primary" onClick={() => {this.postData(this.props.userId, this.props.teamId)}} disabled={this.state.notValidated}>
-              Submit Match
-            </Button>
+            {(this.props.matchId === 0 ) ? (
+              <Button variant="raised" color="primary" onClick={() => {this.postData(this.props.userId, this.props.teamId)}} disabled={this.state.notValidated}>
+                Submit Match
+              </Button>
+            ) : (
+              <Button variant="raised" color="primary" onClick={() => {}} disabled={this.state.notValidated}>
+                Update Match
+              </Button>
+            )}
           </Paper>
         </div>
       </Modal>
